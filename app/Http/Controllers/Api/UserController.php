@@ -32,7 +32,7 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|max:255|unique:tb_akun',
-            'no_hp' => 'required|numeric|unique:tb_akun',
+            'no_hp' => 'required|string|unique:tb_akun',
             'email' => 'required|string|email|max:255|unique:tb_akun',
             'password' => 'required|string|min:6|confirmed',
         ]);
