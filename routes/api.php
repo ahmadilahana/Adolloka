@@ -20,3 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', 'Api\UserController@register');
 Route::post('/login', 'Api\UserController@login');
+
+Route::group([
+    'middleware' => 'jwt.verify',
+    'namespace' => 'Api'
+], function($route){
+    Route::get('/home', 'UserController@getAuthenticatedUser');
+});
