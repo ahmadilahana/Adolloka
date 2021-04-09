@@ -26,4 +26,6 @@ Route::group([
     'namespace' => 'Api'
 ], function($route){
     Route::get('/home', 'UserController@getAuthenticatedUser');
+    Route::get('/user', 'ProfileController@index');
+    Route::post('/user/update', 'ProfileController@cekprofile');
 });

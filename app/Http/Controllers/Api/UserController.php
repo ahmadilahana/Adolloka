@@ -35,6 +35,7 @@ class UserController extends Controller
             'no_hp' => 'required|string|unique:tb_akun',
             'email' => 'required|string|email|max:255|unique:tb_akun',
             'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required|same:password',
         ]);
 
         if($validator->fails()){

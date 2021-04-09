@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TableUser extends Migration
+class TableToko extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class TableUser extends Migration
      */
     public function up()
     {
-        Schema::create('tb_user', function (Blueprint $table) {
+        Schema::create('tb_toko', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->date('tgl_lahir');
-            $table->enum('gender', ['P', 'L']);
-            $table->string('foto')->nullabel;
-            $table->foreignId('akun_id');
+            $table->string('nama_toko');
+            $table->string('jalan');
+            $table->foreignId('kota_id');
+            $table->foreignId('prov_id');
+            $table->foreignId('user_id');
         });
     }
 
