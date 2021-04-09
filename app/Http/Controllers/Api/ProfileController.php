@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
+use App\Models\AlamatUser;
 
 class ProfileController extends Controller
 {
@@ -25,7 +26,16 @@ class ProfileController extends Controller
     public function cekprofile(Request $request)
     {
         $id = auth()->user()->id;
-        
+
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255',
+            'gender' => 'required',
+            'tgl_lahir' => 'required|string|date',
+            'jalan' => 'required|string',
+            'kota_id' => 'required|numeric',
+            'prov_id' => 'required|numeric',
+        ]);
+
         if(! Profile::where('akun_id', $id)->exists()){
             // echo "store";
             return $this->store($request, $id);
@@ -43,25 +53,27 @@ class ProfileController extends Controller
     public function store(Request $request, $id)
     {
         // return response()->json(["data create"], 200);
-        $validator = Validator::make($request->all(), [
-            'nama' => 'required|string|max:255',
-            'gender' => 'required',
-            'tgl_lahir' => 'required|string|date'
-        ]);
+        
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
         
-        $foto = $request->get('foto');
 
         $user = Profile::create([
             'nama' => $request->get('nama'),
             'gender' => $request->get('gender'),
             'tgl_lahir' => $request->get('tgl_lahir'),
             'akun_id' => $id,
-            'foto' => $foto,
+            'foto' => $request->get('foto'),
         ]);
-        return response()->json(['pesan' => 'Data berhasil diubah'], 200);
+        $lokasi = AlamatUser::create([
+            'jalan' => $request->get('nama'),
+            'kota_id' => $request->get('gender'),
+            'prov_id' => $request->get('tgl_lahir'),
+            'user_id' => $id,
+            'jns_alamat' => 'Alamat Utama',
+        ]);
+        return response()->json(['pesan' => 'Data berhasil diubah', 'user' => $user, 'lokasi' => $lokasi], 200);
     }
 
     /**
@@ -84,7 +96,13 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json(['data update'], 200);
+        $user = Profile::where('akun_id', $id)->update([
+                    'nama' => $request->get('nama'),
+                    'gender' => $request->get('gender'),
+                    'tgl_lahir' => $request->get('tgl_lahir'),
+                    'foto' => $request->get('foto'),
+                ]);
+        return response()->json(['pesan' => "Data Berhasil Diubah", 'user' => $user], 200);
     }
 
     /**

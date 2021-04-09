@@ -18,6 +18,7 @@ class TableAlamatUser extends Migration
             $table->string('jalan');
             $table->foreignId('kota_id');
             $table->foreignId('prov_id');
+            $table->string('jns_alamat');
             $table->foreignId('user_id');
         });
     }
