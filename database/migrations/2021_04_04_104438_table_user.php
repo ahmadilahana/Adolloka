@@ -15,11 +15,11 @@ class TableUser extends Migration
     {
         Schema::create('tb_user', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->date('tgl_lahir');
-            $table->enum('gender', ['P', 'L']);
-            $table->string('foto')->nullabel;
-            $table->foreignId('akun_id');
+            $table->string('nama')->nullable(true);
+            $table->date('tgl_lahir')->nullable(true);
+            $table->enum('gender', ['P', 'L'])->nullable(true);
+            $table->string('foto')->nullable(true);
+            $table->foreignId('akun_id')->nullable(true);
         });
     }
 
