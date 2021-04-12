@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Profile;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,13 +48,9 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
-        // dd($user->id);
-        $profile = Profile::create([
-            'akun_id' => $user->id,
-        ]);
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user','profile','token'),201);
+        return response()->json(compact('user','token'),201);
     }
 
     public function getAuthenticatedUser()

@@ -25,7 +25,12 @@ Route::group([
     'middleware' => 'jwt.verify',
     'namespace' => 'Api'
 ], function($route){
+    //data akun
     Route::get('/home', 'UserController@getAuthenticatedUser');
+
+    //data akun dan data profile
     Route::get('/user', 'ProfileController@index');
+
+    //update data profile dan alamat utama
     Route::post('/user/update', 'ProfileController@cekprofile');
 });

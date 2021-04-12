@@ -31,11 +31,13 @@ class ProfileController extends Controller
             'nama' => 'required|string|max:255',
             'gender' => 'required',
             'tgl_lahir' => 'required|string|date',
-            'jalan' => 'required|string',
-            'kota_id' => 'required|numeric',
-            'prov_id' => 'required|numeric',
+            'alamat' => 'required|string',
         ]);
 
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        
         if(! Profile::where('akun_id', $id)->exists()){
             // echo "store";
             return $this->store($request, $id);
@@ -54,10 +56,6 @@ class ProfileController extends Controller
     {
         // return response()->json(["data create"], 200);
         
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-        
 
         $user = Profile::create([
             'nama' => $request->get('nama'),
@@ -66,10 +64,11 @@ class ProfileController extends Controller
             'akun_id' => $id,
             'foto' => $request->get('foto'),
         ]);
+
+        $id = $user->id;
+
         $lokasi = AlamatUser::create([
-            'jalan' => $request->get('nama'),
-            'kota_id' => $request->get('gender'),
-            'prov_id' => $request->get('tgl_lahir'),
+            'alamat' => $request->get('alamat'),
             'user_id' => $id,
             'jns_alamat' => 'Alamat Utama',
         ]);
@@ -96,13 +95,20 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = Profile::where('akun_id', $id)->update([
-                    'nama' => $request->get('nama'),
-                    'gender' => $request->get('gender'),
-                    'tgl_lahir' => $request->get('tgl_lahir'),
-                    'foto' => $request->get('foto'),
-                ]);
-        return response()->json(['pesan' => "Data Berhasil Diubah", 'user' => $user], 200);
+        $user = tap(Profile::where('akun_id', $id))->update([
+            'nama' => $request->get('nama'),
+            'gender' => $request->get('gender'),
+            'tgl_lahir' => $request->get('tgl_lahir'),
+            'foto' => $request->get('foto'),
+        ])->first();
+
+        $id = $user->id;
+
+        $lokasi = tap(AlamatUser::where('user_id', $id))->update([
+            'alamat' => $request->get('alamat'),
+            'jns_alamat' => 'Alamat Utama',
+        ])->first();        
+        return response()->json(['pesan' => "Data Berhasil Diubah", 'user' => [$user, $lokasi]], 200);
     }
 
     /**
