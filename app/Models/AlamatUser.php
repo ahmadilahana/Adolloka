@@ -11,4 +11,9 @@ class AlamatUser extends Model
     protected $table = "tb_almt_user";
     protected $fillable = ['alamat', 'jns_alamat', 'user_id'];
     public $timestamps = false;
+
+    public function user()
+    {
+        return $this->belongsTo(Profile::class, 'user_id');
+    }
 }
