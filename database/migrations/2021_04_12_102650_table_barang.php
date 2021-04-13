@@ -16,7 +16,7 @@ class TableBarang extends Migration
         Schema::create('tb_barang', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->int('jumlah')->nullable();
+            $table->integer('jumlah')->nullable();
             $table->float('harga');
             $table->string('ukuran');
             $table->text('deskripsi');

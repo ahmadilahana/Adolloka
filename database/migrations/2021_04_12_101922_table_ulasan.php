@@ -13,9 +13,9 @@ class TableUlasan extends Migration
      */
     public function up()
     {
-        Schema::create('tb_ulasan_barang', function (Blueprint $table) {
+        Schema::create("tb_ulasan_barang", function (Blueprint $table) {
             $table->id();
-            $table->int('nilai');
+            $table->integer('nilai');
             $table->text('ulasan');
             $table->foreignId('akun_id');
             $table->foreignId('barang_id');
