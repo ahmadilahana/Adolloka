@@ -20,14 +20,15 @@ class ProfileController extends Controller
         $user = auth()->user();
         // $cek = Profile::where('akun_id', $id)->first();
         // $profile = Profile::where("akun_id", "=", $user->id)->first();
-        if($user->load("profile")){
-            $profile = $user["profile"];
+        $user->load("profile");
+        if($profile = $user["profile"]){
+            // $profile = $user["profile"];
             $user['profile']->Load("alamat");
             $alamat = $user['profile']['alamat'];
             unset($user['profile']);
             unset($profile['alamat']);
         }
-        return response()->json(compact("user", "profile", "alamat"), 200);
+        return response()->json(compact("user"), 200);
     }
 
     public function cekprofile(Request $request)
