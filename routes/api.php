@@ -33,4 +33,10 @@ Route::group([
 
     //update data profile dan alamat utama
     Route::post('/user/update', 'ProfileController@cekprofile');
+    
+    //data toko
+    Route::get('/toko', 'TokoController@index');
+
+    //update data toko
+    Route::post('/toko/update', 'TokoController@cektoko');
 });

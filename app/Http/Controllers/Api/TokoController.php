@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Toko;
 
 class TokoController extends Controller
 {
@@ -14,18 +16,47 @@ class TokoController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $toko = Toko::where("akun_id", "=", $user->id);
+        return response()->json(compact('toko'), 200);
     }
 
+    public function cektoko(Request $request)
+    {
+        $id = auth()->user()->id;
+
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        
+        if(! Toko::where('akun_id', $id)->exists()){
+            // echo "store";
+            return $this->store($request, $id);
+        }else {
+            // echo "update";
+            return $this->update($request, $id);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $toko = Toko::create([
+            "nama_toko" => $request->get("nama"),
+            "alamat" => $request->get("alamat"),
+            "akun_id" => $id,
+        ]);
+        
+        return response()->json(compact('toko'), 200);
     }
 
     /**
@@ -48,7 +79,13 @@ class TokoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // echo "update";
+        $toko = tap(Toko::where("akun_id", "=", $id))->update([
+            "nama_toko" => $request->get("nama"),
+            "alamat" => $request->get("alamat"),
+        ])->first();
+        
+        return response()->json(["toko" => $toko], 200);
     }
 
     /**

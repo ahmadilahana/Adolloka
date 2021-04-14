@@ -101,7 +101,7 @@ return [
     |
     */
 
-    'ttl' => env('JWT_TTL', NULL),
+    'ttl' => env('JWT_TTL', 525600),
 
     /*
     |--------------------------------------------------------------------------
@@ -146,11 +146,11 @@ return [
     | present in the payload.
     |
     */
-        // 'exp',
-
+    
     'required_claims' => [
         'iss',
         'iat',
+        'exp',
         'nbf',
         'sub',
         'jti',
