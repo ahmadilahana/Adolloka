@@ -25,10 +25,12 @@ class ProfileController extends Controller
             // $profile = $user["profile"];
             $user['profile']->Load("alamat");
             $alamat = $user['profile']['alamat'];
-            // unset($user['profile']);
-            // unset($profile['alamat']);
+            unset($user['profile']);
+            unset($profile['alamat']);
+            return response()->json(compact("user", "profile", "alamat"), 200);
+        }else{
+            return response()->json(compact("user"), 200);
         }
-        return response()->json(compact("user"), 200);
     }
 
     public function cekprofile(Request $request)
