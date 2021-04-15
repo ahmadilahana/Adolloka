@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
 use App\Models\AlamatUser;
+use Symfony\Component\HttpFoundation\File;
 
 class ProfileController extends Controller
 {
@@ -36,7 +37,6 @@ class ProfileController extends Controller
     public function cekprofile(Request $request)
     {
         $id = auth()->user()->id;
-        echo url('/public');
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
@@ -106,11 +106,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->foto);
+        if ($request->hasFile('foto')) {
+            $path = $request->foto->store('img/profile');
+            $foto = asset($path);
+        }else{
+            $foto = null;
+        }
+        // echo $path;
         $user = tap(Profile::where('akun_id', $id))->update([
             'nama' => $request->get('nama'),
             'gender' => $request->get('gender'),
             'tgl_lahir' => $request->get('tgl_lahir'),
-            'foto' => $request->get('foto'),
+            'foto' => $foto,
         ])->first();
 
         $id = $user->id;
