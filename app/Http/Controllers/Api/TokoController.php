@@ -16,8 +16,9 @@ class TokoController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $toko = Toko::where("akun_id", "=", $user->id);
+        $user = auth()->user()->id;
+        echo $user;
+        $toko = Toko::where('akun_id', $user)->first();
         return response()->json(compact('toko'), 200);
     }
 

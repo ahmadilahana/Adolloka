@@ -25,8 +25,8 @@ class ProfileController extends Controller
             // $profile = $user["profile"];
             $user['profile']->Load("alamat");
             $alamat = $user['profile']['alamat'];
-            unset($user['profile']);
-            unset($profile['alamat']);
+            // unset($user['profile']);
+            // unset($profile['alamat']);
         }
         return response()->json(compact("user"), 200);
     }
@@ -34,6 +34,7 @@ class ProfileController extends Controller
     public function cekprofile(Request $request)
     {
         $id = auth()->user()->id;
+        echo url('/public');
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
