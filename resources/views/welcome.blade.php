@@ -559,7 +559,7 @@
             </div>
         </div>
     </div>
-    <img src="http://adolloka.herokuapp.com/storage/img/profile/EvinmNnyeojZFaSENdhFq77b1naB5co6laFgM72r.png" width="500" height="500" alt="">
+    <img src="http://adolloka.herokuapp.com/storage/img/profile/ffjRuqb0jIB9Z9RSSTFMehD3Wx1UGLlEeCQvCIu6.jpg" width="500" height="500" alt="">
 </body>
 
 </html>
