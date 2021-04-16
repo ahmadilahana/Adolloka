@@ -108,7 +108,8 @@ class ProfileController extends Controller
     {
         // dd($request->foto);
         if ($request->hasFile('foto')) {
-            $path = cloudinary()->upload($request->file('foto')->getRealPath())->getSecurePath();;
+            // $path = cloudinary()->upload($request->file('foto')->getRealPath())->getSecurePath();
+            $path = $request->file('foto')->storeOnCloudinary("adolloka/profile");
             $foto = $path;
         }else{
             $foto = null;
