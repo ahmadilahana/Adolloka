@@ -561,7 +561,7 @@
     </div>
     {{-- {{dd(App\Models\Profile::all())}} --}}
     @foreach (App\Models\Profile::all() as $item)
-        <img src="{{ $item['foto'] }}" width="100" height="100" alt="">
+        <img src="{{ asset($item['foto']) }}" width="100" height="100" alt="">
     @endforeach
 </body>
 

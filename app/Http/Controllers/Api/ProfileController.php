@@ -108,8 +108,8 @@ class ProfileController extends Controller
     {
         // dd($request->foto);
         if ($request->hasFile('foto')) {
-            $path = $request->foto->store('img/profile');
-            $foto = asset("storage/".$path);
+            $path = cloudinary()->upload($request->file('foto')->getRealPath())->getSecurePath();;
+            $foto = $path;
         }else{
             $foto = null;
         }
