@@ -108,8 +108,8 @@ class ProfileController extends Controller
     {
         // dd($request->foto);
         if ($request->hasFile('foto')) {
-            $path = $request->foto->store('public/img/profile');
-            $foto = asset($path);
+            $path = $request->foto->store('img/profile');
+            $foto = asset("storage/".$path);
         }else{
             $foto = null;
         }

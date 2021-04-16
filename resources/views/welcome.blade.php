@@ -559,7 +559,10 @@
             </div>
         </div>
     </div>
-    <img src="https://adolloka.herokuapp.com/storage/img/profile/ffjRuqb0jIB9Z9RSSTFMehD3Wx1UGLlEeCQvCIu6.jpg" width="500" height="500" alt="">
+    {{-- {{dd(App\Models\Profile::all())}} --}}
+    @foreach (App\Models\Profile::all() as $item)
+        <img src="{{ $item['foto'] }}" width="100" height="100" alt="">
+    @endforeach
 </body>
 
 </html>
