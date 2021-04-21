@@ -114,8 +114,8 @@ class FotoProfileController extends Controller
             $result = $request->file('foto')->storeOnCloudinary('adolloka/profile');
             $foto_id = $result->getPublicId();
             $foto = $result->getSecurePath();
-
-            if (! $profile_id = Profile::where('akun_id', '=', $id)->first()->profile_id) {
+            $profile_id = Profile::where('akun_id', '=', $id)->first()->profile_id;
+            if (! $profile_id) {
                 echo "tidak ada gambar";
                 $profile = FotoProfile::create([
                     'id' => $foto_id,
@@ -135,8 +135,8 @@ class FotoProfileController extends Controller
                 'profile_id' => $foto_id,
                 'akun_id' => $id,
             ])->first();
-
-            return response()->json(compact("user", "profile"),200);
+            $user->load("foto");
+            return response()->json(compact("user"),200);
         }
     }
 

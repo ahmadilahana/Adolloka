@@ -13,4 +13,9 @@ class FotoProfile extends Model
     public $timestamps = false;
     // protected $primaryKey = 'id';
     protected $keyType = 'string';
+
+    public function foto()
+    {
+        return $this->hasOne(Profile::class, "profile_id");
+    }
 }

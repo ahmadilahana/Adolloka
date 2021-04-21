@@ -21,6 +21,7 @@ class ProfileController extends Controller
             // $profile = $user["profile"];
             $user['profile']->Load("alamat");
             $alamat = $user['profile']['alamat'];
+            $foto = $profile->load('foto');
             unset($user['profile']);
             unset($profile['alamat']);
             return response()->json(compact("user", "profile", "alamat"), 200);
