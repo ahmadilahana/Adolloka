@@ -18,7 +18,7 @@ class TableUser extends Migration
             $table->string('nama')->nullable(true);
             $table->date('tgl_lahir')->nullable(true);
             $table->enum('gender', ['P', 'L'])->nullable(true);
-            $table->string('foto')->nullable(true);
+            $table->string('profile_id')->foregin()->nullable(true);
             $table->foreignId('akun_id')->nullable(true);
         });
     }

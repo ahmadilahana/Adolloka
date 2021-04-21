@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TableAlamatUser extends Migration
+class TableFotoProfile extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class TableAlamatUser extends Migration
      */
     public function up()
     {
-        Schema::create('tb_almt_user', function (Blueprint $table) {
-            $table->id();
-            $table->string('alamat')->nullable();
-            $table->string('jns_alamat')->nullable();
-            $table->foreignId('user_id');
+        Schema::create('tb_ft_profile', function (Blueprint $table) {
+            $table->string('id')->unique();
+            $table->string('foto')->unique();
         });
     }
 

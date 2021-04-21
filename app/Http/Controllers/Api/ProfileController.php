@@ -11,11 +11,6 @@ use Symfony\Component\HttpFoundation\File;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $user = auth()->user();
@@ -57,23 +52,14 @@ class ProfileController extends Controller
             return $this->update($request, $id);
         }
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request, $id)
     {
-        // return response()->json(["data create"], 200);
-        
-
         $user = Profile::create([
             'nama' => $request->get('nama'),
             'gender' => $request->get('gender'),
             'tgl_lahir' => $request->get('tgl_lahir'),
             'akun_id' => $id,
-            'foto' => $request->get('foto'),
         ]);
 
         $id = $user->id;
@@ -86,12 +72,6 @@ class ProfileController extends Controller
         return response()->json(['pesan' => 'Data berhasil diubah', 'user' => $user, 'lokasi' => $lokasi], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
@@ -107,19 +87,10 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->foto);
-        if ($request->hasFile('foto')) {
-            // $path = cloudinary()->upload($request->file('foto')->getRealPath())->getSecurePath();
-            $path = $request->file('foto')->storeOnCloudinary('adolloka/profile');
-            $foto = $path->getSecurePath();
-        }else{
-            $foto = null;
-        }
-        // echo $path;
         $user = tap(Profile::where('akun_id', $id))->update([
             'nama' => $request->get('nama'),
             'gender' => $request->get('gender'),
             'tgl_lahir' => $request->get('tgl_lahir'),
-            'foto' => $foto,
         ])->first();
 
         $id = $user->id;

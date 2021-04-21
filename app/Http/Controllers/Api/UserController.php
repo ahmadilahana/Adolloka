@@ -78,8 +78,24 @@ class UserController extends Controller
         return response()->json(compact('user'));
     }
 
-    public function getUser()
+    public function editUsername(Request $request)
     {
-        # code...
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|string|max:255|unique:tb_akun',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        if (! Hash::check($request->password, $request->user()->password)) {
+            return response()->json(['password' => 'The provided password does not match our records.'], 400);
+        }
+
+        $id = auth()->user()->id;
+
+        $user = tap(User::find($id))->update([
+            'username' => $request->get('username'),
+        ])->first();
+        return response()->json(['pesan' => "Username Diubah", 'user' => [$user]], 200);
     }
 }

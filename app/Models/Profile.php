@@ -10,7 +10,7 @@ class Profile extends Model
     use HasFactory;
 
     protected $table = "tb_user";
-    protected $fillable = ['nama', 'foto', 'gender', 'tgl_lahir', 'akun_id'];
+    protected $fillable = ['nama', 'profile_id', 'gender', 'tgl_lahir', 'akun_id'];
     public $timestamps = false;
 
     public function user()
