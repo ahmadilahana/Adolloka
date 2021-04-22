@@ -22,9 +22,12 @@ class ProfileController extends Controller
             $user['profile']->Load("alamat");
             $alamat = $user['profile']['alamat'];
             $foto = $profile->load('foto');
+            $user->load('toko');
+            $toko = $user['toko'];
+            unset($user['toko']);
             unset($user['profile']);
             unset($profile['alamat']);
-            return response()->json(compact("user", "profile", "alamat"), 200);
+            return response()->json(compact("user", "profile", "alamat", "toko"), 200);
         }else{
             return response()->json(compact("user"), 200);
         }

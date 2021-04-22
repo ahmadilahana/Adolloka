@@ -20,7 +20,6 @@ class TableBarang extends Migration
             $table->float('harga');
             $table->string('ukuran');
             $table->text('deskripsi');
-            $table->string('foto')->nullable(true);
             $table->foreignId('kategori_id');
             $table->foreignId('toko_id');
         });

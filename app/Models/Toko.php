@@ -11,4 +11,10 @@ class Toko extends Model
     protected $table = "tb_toko";
     protected $fillable = ['nama_toko', 'alamat', 'akun_id'];
     public $timestamps = false;
+
+    
+    public function akun()
+    {
+        return $this->belongsTo(User::class, 'akun_id');
+    }
 }

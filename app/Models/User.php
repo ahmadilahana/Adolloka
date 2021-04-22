@@ -60,4 +60,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Profile::class, 'akun_id');
     }
+    
+    public function toko()
+    {
+        return $this->hasOne(Toko::class, 'akun_id');
+    }
 }
