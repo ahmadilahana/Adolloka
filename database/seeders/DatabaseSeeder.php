@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             tb_akun::class,
             tb_alamat_user::class,
             tb_user::class,
+            tb_kategori::class,
         ]);
     }
 }

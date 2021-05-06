@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
-use App\Models\AlamatUser;
+// use App\Models\AlamatUser;
 use Symfony\Component\HttpFoundation\File;
 
 class ProfileController extends Controller
@@ -41,7 +41,6 @@ class ProfileController extends Controller
             'nama' => 'required|string|max:255',
             'gender' => 'required',
             'tgl_lahir' => 'required|string|date',
-            'alamat' => 'required|string',
         ]);
 
         if($validator->fails()){
@@ -66,14 +65,7 @@ class ProfileController extends Controller
             'akun_id' => $id,
         ]);
 
-        $id = $user->id;
-
-        $lokasi = AlamatUser::create([
-            'alamat' => $request->get('alamat'),
-            'user_id' => $id,
-            'jns_alamat' => 'Alamat Utama',
-        ]);
-        return response()->json(['pesan' => 'Data berhasil diubah', 'user' => $user, 'lokasi' => $lokasi], 200);
+        return response()->json(['pesan' => 'Data berhasil diubah', 'user' => $user], 200);
     }
 
     public function show($id)
@@ -96,14 +88,8 @@ class ProfileController extends Controller
             'gender' => $request->get('gender'),
             'tgl_lahir' => $request->get('tgl_lahir'),
         ])->first();
-
-        $id = $user->id;
-
-        $lokasi = tap(AlamatUser::where('user_id', $id))->update([
-            'alamat' => $request->get('alamat'),
-            'jns_alamat' => 'Alamat Utama',
-        ])->first();        
-        return response()->json(['pesan' => "Data Berhasil Diubah", 'user' => [$user, $lokasi]], 200);
+  
+        return response()->json(['pesan' => "Data Berhasil Diubah", 'user' => $user], 200);
     }
 
     /**

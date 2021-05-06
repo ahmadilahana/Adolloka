@@ -34,8 +34,11 @@ Route::group([
     //data akun dan data profile
     Route::get('/user', 'ProfileController@index');
 
-    //update data profile dan alamat utama
-    Route::post('/user/update', 'ProfileController@cekprofile');
+    //update data profile
+    Route::post('/user/profile/update', 'ProfileController@cekprofile');
+
+    //create data alamat
+    Route::post('/user/alamat/update', 'AlamatUserController@cekAlamat');
 
     //update foto profile
     Route::post('/foto/profile/update', 'FotoProfileController@cekprofile');
@@ -46,4 +49,8 @@ Route::group([
 
     //update data toko
     Route::post('/toko/update', 'TokoController@cektoko');
+
+    //create data barang
+    Route::post('/{id}/barang', 'BarangController@store');
+    
 });
