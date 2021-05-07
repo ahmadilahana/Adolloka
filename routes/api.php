@@ -40,6 +40,12 @@ Route::group([
     //create data alamat
     Route::post('/user/profile/alamat/update', 'AlamatUserController@cekAlamat');
 
+    //get data alamat kirim
+    Route::get('/user/alamat', 'AlamatUserController@index');
+
+    //create data alamat kirim
+    Route::post('/user/alamat/create', 'AlamatUserController@alamatbaru');
+
     //update foto profile
     Route::post('/user/profile/foto/update', 'FotoProfileController@cekprofile');
     

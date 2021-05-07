@@ -17,7 +17,10 @@ class AlamatUserController extends Controller
      */
     public function index()
     {
-        //
+        $id = auth()->user()->load("profile")->profile->id;
+
+        $data = AlamatUser::where('user_id', $id)->get();
+        return response()->json(compact("data"), 200);
     }
 
     public function cekAlamat(Request $request)
@@ -40,6 +43,29 @@ class AlamatUserController extends Controller
             return $this->update($request, $id);
         }
         
+    }
+
+    public function alamatbaru(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'alamat' => 'required|string',
+            'jns_alamat' => 'required|string',
+
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+
+        $id = auth()->user()->load("profile")->profile->id;
+        
+        AlamatUser::create([
+            'alamat' => $request->get('alamat'),
+            'jns_alamat' => $request->get('jns_alamat'),
+            'user_id' => $id,
+        ]);
+        return response()->json(["Data Berhasil Disimpan
+        "], 200);
     }
     /**
      * Store a newly created resource in storage.
