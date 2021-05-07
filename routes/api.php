@@ -35,10 +35,10 @@ Route::group([
     Route::get('/user', 'ProfileController@index');
 
     //update data profile
-    Route::post('/user/profile/update', 'ProfileController@cekprofile');
+    Route::post('/user/profile/biodata/update', 'ProfileController@cekprofile');
 
     //create data alamat
-    Route::post('/user/alamat/update', 'AlamatUserController@cekAlamat');
+    Route::post('/user/profile/alamat/update', 'AlamatUserController@cekAlamat');
 
     //update foto profile
     Route::post('/foto/profile/update', 'FotoProfileController@cekprofile');
