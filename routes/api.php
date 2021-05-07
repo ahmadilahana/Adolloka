@@ -41,7 +41,7 @@ Route::group([
     Route::post('/user/profile/alamat/update', 'AlamatUserController@cekAlamat');
 
     //update foto profile
-    Route::post('/foto/profile/update', 'FotoProfileController@cekprofile');
+    Route::post('/user/profile/foto/update', 'FotoProfileController@cekprofile');
     
     Route::get('/allprofile', 'FotoProfileController@index');
     //data toko
