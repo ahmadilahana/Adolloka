@@ -110,6 +110,24 @@ class AlamatUserController extends Controller
         return response()->json(["Data Berhasil Dirubah"], 200);
     }
 
+    public function edit(Request $request, $id_alamat)
+    {
+        $validator = Validator::make($request->all(), [
+            'alamat' => 'required|string',
+            'jns_alamat' => 'required|string',
+
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        
+        $id = auth()->user()->load("profile")->profile->id;
+        $data = AlamatUser::where("user_id", $id)->where("id", $id_alamat)->update([
+            'alamat' => $request->get('alamat'),
+            'jns_alamat' => $request->get('jns_alamat')
+        ]);
+        return response()->json(["Data Berhasil Dirubah"], 200);
+    }
     /**
      * Remove the specified resource from storage.
      *

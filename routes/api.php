@@ -46,6 +46,9 @@ Route::group([
     //create data alamat kirim
     Route::post('/user/alamat/create', 'AlamatUserController@alamatbaru');
 
+    //edit data alamat kirim
+    Route::post('/user/alamat/{id_alamat}/edit', 'AlamatUserController@edit');
+
     //update foto profile
     Route::post('/user/profile/foto/update', 'FotoProfileController@cekprofile');
     
