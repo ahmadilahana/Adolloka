@@ -9,7 +9,7 @@ class AlamatUser extends Model
 {
     use HasFactory;
     protected $table = "tb_almt_user";
-    protected $fillable = ['alamat', 'jns_alamat', 'user_id'];
+    protected $fillable = ['alamat', 'jns_alamat', 'status', 'user_id'];
     public $timestamps = false;
 
     public function user()

@@ -62,6 +62,7 @@ class AlamatUserController extends Controller
         AlamatUser::create([
             'alamat' => $request->get('alamat'),
             'jns_alamat' => $request->get('jns_alamat'),
+            'status' => 'diseble',
             'user_id' => $id,
         ]);
         return response()->json(["Data Berhasil Disimpan
@@ -78,6 +79,7 @@ class AlamatUserController extends Controller
         AlamatUser::create([
             'alamat' => $request->get('alamat'),
             'jns_alamat' => 'Alamat Utama',
+            'status' => 'eneble',
             'user_id' => $id,
         ]);
         return response()->json(["Data Berhasil Disimpan
@@ -134,8 +136,25 @@ class AlamatUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_alamat)
     {
-        //
+        AlamatUser::destroy($id_alamat);
+        return response()->json(['Data Berhasil Dihapus'], 200);
+    }
+
+    public function aktifAlamat($id_alamat)
+    {
+        
+        $id = auth()->user()->load("profile")->profile->id;
+
+        AlamatUser::where('user_id', $id)->update([
+            'status' => "diseble",
+        ]);
+
+        AlamatUser::find($id_alamat)->update([
+            'status' => "eneble",
+        ]);
+
+        return response()->json(["alamat berhasil diaktifkan"], 200);
     }
 }

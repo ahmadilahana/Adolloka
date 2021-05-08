@@ -47,14 +47,22 @@ Route::group([
     Route::post('/user/alamat/create', 'AlamatUserController@alamatbaru');
 
     //edit data alamat kirim
-    Route::post('/user/alamat/{id_alamat}/edit', 'AlamatUserController@edit');
+    Route::post('/user/alamat/{id_alamat}/update', 'AlamatUserController@edit');
+
+    //delete data alamat kirim
+    Route::post('/user/alamat/{id_alamat}/delete', 'AlamatUserController@destroy');
+    
+    //eneble data alamat kirim
+    Route::post('/user/alamat/{id_alamat}/eneble', 'AlamatUserController@aktifAlamat');
 
     //update foto profile
     Route::post('/user/profile/foto/update', 'FotoProfileController@cekprofile');
     
-    Route::get('/allprofile', 'FotoProfileController@index');
     //data toko
     Route::get('/toko', 'TokoController@index');
+    
+    //get data barang toko
+    Route::get('/toko/barang', 'TokoController@getbarang');
 
     //update data toko
     Route::post('/toko/update', 'TokoController@cektoko');
