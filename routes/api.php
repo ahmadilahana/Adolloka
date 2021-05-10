@@ -63,11 +63,14 @@ Route::group([
     
     //get data barang toko
     Route::get('/toko/barang', 'TokoController@getbarang');
+    
+    //create data barang toko
+    Route::post('/toko/barang/create', 'TokoController@tambahBarang');
 
     //update data toko
     Route::post('/toko/update', 'TokoController@cektoko');
 
-    //create data barang
-    Route::post('/{id}/barang', 'BarangController@store');
+    //get barang
+    Route::get('/barang', 'BarangController@index');
     
 });

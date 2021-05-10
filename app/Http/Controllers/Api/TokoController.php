@@ -75,9 +75,39 @@ class TokoController extends Controller
     public function getbarang()
     {
         $user = auth()->user()->id;
-        $id = Toko::where('akun_id', $user)->first();
+        $id = Toko::where('akun_id', $user)->first()->id;
         // echo $id;
+        $data = Barang::where('toko_id', $id)->get();
+        return response()->json(compact('data'), 200);
 
+    }
+
+    public function tambahBarang(Request $request)
+    {
+        $user = auth()->user()->id;
+        $id = Toko::where('akun_id', $user)->first()->id;
+
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string',
+            'jumlah' => 'required|numeric',
+            'harga' => 'required|numeric',
+            'deskripsi' => 'required|string',
+            'kategori' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $data = Barang::create([
+            'nama' => $request->get('nama'),
+            'jumlah' => $request->get('jumlah'),
+            'harga' => $request->get('harga'),
+            'deskripsi' => $request->get('deskripsi'),
+            'kategori_id' => $request->get('kategori'),
+            'toko_id' => $id,
+        ]);
+        return response()->json(['data berhasil ditambah'], 200);
     }
     /**
      * Display the specified resource.

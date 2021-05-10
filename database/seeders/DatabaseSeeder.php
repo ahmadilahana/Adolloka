@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             tb_alamat_user::class,
             tb_user::class,
             tb_kategori::class,
+            tb_toko::class,
+            tb_barang::class,
         ]);
     }
 }
