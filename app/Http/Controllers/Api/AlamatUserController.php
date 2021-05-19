@@ -26,7 +26,9 @@ class AlamatUserController extends Controller
     public function cekAlamat(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'alamat' => 'required|string'
+            'alamat' => 'required|string',
+            'penerima' => 'required|string',
+            'no_hp' => 'required|numeric',
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
@@ -50,6 +52,8 @@ class AlamatUserController extends Controller
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
             'jns_alamat' => 'required|string',
+            'penerima' => 'required|string',
+            'no_hp' => 'required|numeric',
 
         ]);
         if($validator->fails()){
@@ -60,6 +64,8 @@ class AlamatUserController extends Controller
         $id = auth()->user()->load("profile")->profile->id;
         
         AlamatUser::create([
+            'penerima' => $request->get('penerima'),
+            'no_hp' => $request->get('no_hp'),
             'alamat' => $request->get('alamat'),
             'jns_alamat' => $request->get('jns_alamat'),
             'status' => 'diseble',
@@ -68,22 +74,20 @@ class AlamatUserController extends Controller
         return response()->json(["Data Berhasil Disimpan
         "], 200);
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, $id)
     {
-        AlamatUser::create([
+        // echo $id;
+        // dd($no_hp);
+        $alamat = AlamatUser::create([
+            'penerima' => $request->get('penerima'),
+            'no_hp' => $request->get('no_hp'),
             'alamat' => $request->get('alamat'),
             'jns_alamat' => 'Alamat Utama',
             'status' => 'eneble',
             'user_id' => $id,
         ]);
         return response()->json(["Data Berhasil Disimpan
-        "], 200);
+        ", compact('alamat')], 200);
     }
 
     /**
@@ -117,6 +121,8 @@ class AlamatUserController extends Controller
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
             'jns_alamat' => 'required|string',
+            'penerima' => 'required|string',
+            'no_hp' => 'required|numeric',
 
         ]);
         if($validator->fails()){
@@ -126,7 +132,9 @@ class AlamatUserController extends Controller
         $id = auth()->user()->load("profile")->profile->id;
         $data = AlamatUser::where("user_id", $id)->where("id", $id_alamat)->update([
             'alamat' => $request->get('alamat'),
-            'jns_alamat' => $request->get('jns_alamat')
+            'jns_alamat' => $request->get('jns_alamat'),
+            'penerima' => $request->get('penerima'),
+            'no_hp' => $request->get('no_hp'),
         ]);
         return response()->json(["Data Berhasil Dirubah"], 200);
     }

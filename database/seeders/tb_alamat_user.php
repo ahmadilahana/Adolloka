@@ -15,18 +15,24 @@ class tb_alamat_user extends Seeder
     public function run()
     {
         AlamatUser::create([
+                'penerima' => "tes1",
+                'no_hp' => '08130813013',
                 'alamat' => 'semarang',
                 'jns_alamat' => 'Alamat Utama',
                 'status' => 'eneble',
                 'user_id' => 1
         ]);
         AlamatUser::create([
+                'penerima' => "tes2",
+                'no_hp' => '08130813013',
                 'alamat' => 'semarang',
                 'jns_alamat' => 'Alamat Utama',
                 'status' => 'eneble',
                 'user_id' => 2
         ]);
         AlamatUser::create([
+                'penerima' => "tes3",
+                'no_hp' => '08130813013',
                 'alamat' => 'semarang',
                 'jns_alamat' => 'Alamat Utama',
                 'status' => 'eneble',

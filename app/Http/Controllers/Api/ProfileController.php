@@ -36,7 +36,7 @@ class ProfileController extends Controller
     public function cekprofile(Request $request)
     {
         $id = auth()->user()->id;
-
+        // dd($id);
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
             'gender' => 'required',

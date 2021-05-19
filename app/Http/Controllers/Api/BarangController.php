@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Barang;
+use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
 {
@@ -23,5 +24,11 @@ class BarangController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function kategori()
+    {
+        $kat = DB::table('tb_kat_barang')->get();
+        return response()->json(compact('kat'), 200);
     }
 }

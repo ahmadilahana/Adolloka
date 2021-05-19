@@ -15,6 +15,8 @@ class TableAlamatUser extends Migration
     {
         Schema::create('tb_almt_user', function (Blueprint $table) {
             $table->id();
+            $table->string('penerima')->nullable();
+            $table->string('no_hp')->nullable();
             $table->string('alamat')->nullable();
             $table->string('jns_alamat')->nullable();
             $table->enum('status', ['eneble', 'diseble'])->nullable();
