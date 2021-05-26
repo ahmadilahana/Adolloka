@@ -17,4 +17,9 @@ class Barang extends Model
     {
         return $this->belongsTo(Toko::class, 'toko_id');
     }
+
+    public function chart()
+    {
+        return $this->hasMany(Chart::class, "id_barang");
+    }
 }

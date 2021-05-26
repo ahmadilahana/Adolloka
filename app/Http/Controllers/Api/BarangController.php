@@ -21,9 +21,11 @@ class BarangController extends Controller
         return response()->json(compact('data'), 200);
     }
 
-    public function show($id)
+    public function show($id_barang)
     {
-        //
+        $data = Barang::where('id', $id_barang)->first()->load('toko');
+
+        return response()->json(compact('data'), 200);
     }
 
     public function kategori()

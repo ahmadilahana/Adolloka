@@ -67,13 +67,31 @@ Route::group([
     //create data barang toko
     Route::post('/toko/barang/create', 'TokoController@tambahBarang');
 
+    //update data barang toko
+    Route::post('/toko/barang/{id_barang}/update', 'TokoController@updateBarang');
+
     //update data toko
     Route::post('/toko/update', 'TokoController@cektoko');
 
     //get barang
     Route::get('/barang', 'BarangController@index');
 
+    //get satu barang
+    Route::get('/barang/{id_barang}/show', 'BarangController@show');
+
     //get Kategori Barang
     Route::get('/barang/kategori', 'BarangController@kategori');
+
+    //create chart
+    Route::post('/chart/add', 'ChartController@add');
+
+    //delete chart
+    Route::post('/chart/{id}/delete', 'ChartController@delete');
+    
+    //update chart
+    Route::post('/chart/{id}/edit', 'ChartController@edit');
+    
+    //get chart
+    Route::get('/chart', 'ChartController@index');
     
 });
