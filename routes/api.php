@@ -30,6 +30,15 @@ Route::group([
 
     //edit username
     Route::post('/username/update', 'UserController@editUsername');
+    
+    //edit password
+    Route::post('/password/update', 'UserController@editPassword');
+
+    //edit email
+    Route::post('/email/update', 'UserController@editEmail');
+    
+    //edit no hp
+    Route::post('/no_hp/update', 'UserController@editNoHp');
 
     //data akun dan data profile
     Route::get('/user', 'ProfileController@index');

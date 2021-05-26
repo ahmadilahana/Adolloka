@@ -87,7 +87,7 @@ class UserController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
-        if (! Hash::check($request->password, $request->user()->password)) {
+        if (! Hash::check($request->get("password"), Hash::make(auth()->user()->password))) {
             return response()->json(['password' => 'The provided password does not match our records.'], 400);
         }
 
@@ -97,5 +97,72 @@ class UserController extends Controller
             'username' => $request->get('username'),
         ])->first();
         return response()->json(['pesan' => "Username Diubah", 'user' => [$user]], 200);
+    }
+
+    public function editPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'new_password' => 'required|string|max:255|unique:tb_akun,password',
+            'new_password_confirmation' => 'required|same:new_password',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        if (! Hash::check($request->get("password"), Hash::make(auth()->user()->password))) {
+            return response()->json(['password' => 'The provided password does not match our records.'], 400);
+        }
+
+        $id = auth()->user()->id;
+
+        $user = tap(User::find($id))->update([
+            'password' => $request->get('new_password'),
+        ])->first();
+
+        return response()->json(['pesan' => "password berhasil Diubah", 'user' => [$user]], 200);
+    }
+
+    public function editEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|max:255|unique:tb_akun',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        // var_dump(Hash::check($request->get("password"), Hash::make(auth()->user()->password)));
+        if (! Hash::check($request->get("password"), Hash::make(auth()->user()->password))) {
+            return response()->json(['password' => 'The provided password does not match our records.'], 400);
+        }
+
+        $id = auth()->user()->id;
+
+        $user = tap(User::find($id))->update([
+            'email' => $request->get('email'),
+        ])->first();
+        return response()->json(['pesan' => "email Diubah", 'user' => [$user]], 200);
+    }
+
+    public function editNoHp(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'no_hp' => 'required|string|max:255|unique:tb_akun',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        if (! Hash::check($request->get("password"), Hash::make(auth()->user()->password))) {
+            return response()->json(['password' => 'The provided password does not match our records.'], 400);
+        }
+
+        $id = auth()->user()->id;
+
+        $user = tap(User::find($id))->update([
+            'no_hp' => $request->get('no_hp'),
+        ])->first();
+        return response()->json(['pesan' => "no hp Diubah", 'user' => [$user]], 200);
     }
 }
