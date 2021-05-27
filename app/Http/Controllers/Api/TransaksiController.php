@@ -9,6 +9,9 @@ class TransaksiController extends Controller
 {
     public function CheckOut(Request $request)
     {
-        # code...
+        public function checkout(Request $request)
+        {
+            
+        }
     }
 }
