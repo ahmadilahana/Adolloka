@@ -15,7 +15,7 @@ class TableHistoryTransaksi extends Migration
     {
         Schema::create('tb_history_transaksi', function (Blueprint $table) {
             $table->id();
-            $table->timestamps("tgl_transaksi");
+            $table->timestamp("tgl_transaksi");
             $table->foreignId('barang_id');
             $table->foreignId('toko_id');
             $table->text('keterangan');

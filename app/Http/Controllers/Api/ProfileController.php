@@ -19,14 +19,16 @@ class ProfileController extends Controller
         $user->load("profile");
         if($profile = $user["profile"]){
             // $profile = $user["profile"];
-            $user['profile']->Load("alamat");
-            $alamat = $this->sort_array($user['profile']['alamat'], "id");
+            $load_alamat = $user['profile']->Load("alamat");
+            if($load_alamat){
+                $alamat = $this->sort_array($user['profile']['alamat'], "id");
+                unset($profile['alamat']);
+            }
             $foto = $profile->load('foto');
             $user->load('toko');
             $toko = $user['toko'];
             unset($user['toko']);
             unset($user['profile']);
-            unset($profile['alamat']);
             return response()->json(compact("user", "profile", "alamat", "toko"), 200);
         }else{
             return response()->json(compact("user"), 200);
