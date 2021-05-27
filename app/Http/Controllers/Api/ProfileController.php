@@ -20,13 +20,7 @@ class ProfileController extends Controller
         if($profile = $user["profile"]){
             // $profile = $user["profile"];
             $user['profile']->Load("alamat");
-            $alamat = $user['profile']['alamat'];
-            function cmp($a, $b)
-            {
-                return strcmp($a["id"], $b["id"]);
-            }
-
-            usort($alamat, "cmp");
+            $alamat = $this->sort_array($user['profile']['alamat'], "id");
             $foto = $profile->load('foto');
             $user->load('toko');
             $toko = $user['toko'];
@@ -37,6 +31,21 @@ class ProfileController extends Controller
         }else{
             return response()->json(compact("user"), 200);
         }
+    }
+
+    public function sort_array($array, $jenis)
+    {
+        $short = [];
+
+        foreach ($array as $key => $value) {
+            $short[$array[$key][$jenis]] = $value;
+        }
+        ksort($short);
+
+        foreach ($short as $key => $value) {
+            $hasil[] = $value;
+        }
+        return $hasil;
     }
 
     public function cekprofile(Request $request)
