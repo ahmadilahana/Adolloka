@@ -18,14 +18,14 @@ class TableTransaksi extends Migration
             $table->timestamps("tgl_transaksi");
             $table->foreignId('barang_id');
             $table->foreignId('toko_id');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->integer('jumlah');
             $table->double('total_harga');
             $table->foreignId('akun_id');
             $table->foreignId('alamat_id');
             $table->enum('status', ['pembayaran', 'sudah dibayar','packing', 'pengiriman','diterima']);
-            $table->string('bukti_pembayaran');
-            $table->string('kode_resi');
+            $table->string('bukti_pembayaran')->nullable();
+            $table->string('kode_resi')->nullable();
         });
     }
 

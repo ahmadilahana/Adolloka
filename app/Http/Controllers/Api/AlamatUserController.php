@@ -20,7 +20,23 @@ class AlamatUserController extends Controller
         $id = auth()->user()->load("profile")->profile->id;
 
         $data = AlamatUser::where('user_id', $id)->get();
+        $data = $this->sort_array($data, "id");
         return response()->json(compact("data"), 200);
+    }
+
+    public function sort_array($array, $jenis)
+    {
+        $short = [];
+
+        foreach ($array as $key => $value) {
+            $short[$array[$key][$jenis]] = $value;
+        }
+        ksort($short);
+
+        foreach ($short as $key => $value) {
+            $hasil[] = $value;
+        }
+        return $hasil;
     }
 
     public function cekAlamat(Request $request)
