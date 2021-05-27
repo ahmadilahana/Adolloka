@@ -25,15 +25,6 @@ class AlamatUserController extends Controller
 
     public function cekAlamat(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'alamat' => 'required|string',
-            'penerima' => 'required|string',
-            'no_hp' => 'required|numeric',
-        ]);
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
         $id = auth()->user()->load("profile")->profile->id;
         // echo auth()->user()->load("profile");
         if (! AlamatUser::where('user_id', $id)->where("jns_alamat", "Alamat Utama")->first()) {
@@ -76,6 +67,16 @@ class AlamatUserController extends Controller
     }
     public function store(Request $request, $id)
     {
+        
+        $validator = Validator::make($request->all(), [
+            'alamat' => 'required|string',
+            'penerima' => 'required|string',
+            'no_hp' => 'required|numeric',
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
         // echo $id;
         // dd($no_hp);
         $alamat = AlamatUser::create([
@@ -110,6 +111,14 @@ class AlamatUserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $validator = Validator::make($request->all(), [
+            'alamat' => 'required|string',
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
         $data = AlamatUser::where("user_id", $id)->where("jns_alamat", "Alamat Utama")->update([
             'alamat' => $request->get('alamat')
         ]);
