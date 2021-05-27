@@ -21,6 +21,12 @@ class ProfileController extends Controller
             // $profile = $user["profile"];
             $user['profile']->Load("alamat");
             $alamat = $user['profile']['alamat'];
+            function cmp($a, $b)
+            {
+                return strcmp($a["id"], $b["id"]);
+            }
+
+            usort($alamat, "cmp");
             $foto = $profile->load('foto');
             $user->load('toko');
             $toko = $user['toko'];
