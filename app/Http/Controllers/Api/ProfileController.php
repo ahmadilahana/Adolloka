@@ -43,7 +43,7 @@ class ProfileController extends Controller
             $short[$array[$key][$jenis]] = $value;
         }
         ksort($short);
-
+        $hasil = [];
         foreach ($short as $key => $value) {
             $hasil[] = $value;
         }

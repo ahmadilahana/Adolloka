@@ -33,6 +33,8 @@ class AlamatUserController extends Controller
         }
         ksort($short);
 
+        $hasil = [];
+
         foreach ($short as $key => $value) {
             $hasil[] = $value;
         }
