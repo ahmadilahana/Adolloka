@@ -62,7 +62,7 @@ Route::group([
     Route::post('/user/alamat/{id_alamat}/delete', 'AlamatUserController@destroy');
     
     //eneble data alamat kirim
-    Route::get('/user/alamat/{id_alamat}/eneble', 'AlamatUserController@aktifAlamat');
+    Route::post('/user/alamat/{id_alamat}/eneble', 'AlamatUserController@aktifAlamat');
 
     //update foto profile
     Route::post('/user/profile/foto/update', 'FotoProfileController@cekprofile');
@@ -103,4 +103,12 @@ Route::group([
     //get chart
     Route::get('/chart', 'ChartController@index');
     
+    //get checkout
+    Route::post('/checkout', 'TransaksiController@checkout');
+    
+    //get beli
+    Route::post('/beli ', 'TransaksiController@beli');
+    
+    //get bayar
+    Route::post('/bayar ', 'TransaksiController@bayar');
 });

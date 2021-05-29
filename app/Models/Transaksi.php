@@ -11,4 +11,5 @@ class Transaksi extends Model
 
     protected $table = "tb_transaksi";
     protected $fillable = ['tgl_transaksi', 'barang_id', 'toko_id', 'keterangan', 'jumlah', 'total_harga', 'akun_id', 'alamat_id', 'status', 'bukti_pembayaran', 'kode_resi'];
+    public $timestamps = false;
 }
