@@ -13,12 +13,17 @@ class ChartController extends Controller
     public function add(Request $request)
     {
         $id = auth()->user()->id;
-
-        Chart::create([
-            'id_akun' => $id,
-            'id_barang' => $request->get('id_barang'),
-            'jumlah' => $request->get('jumlah'),
-        ]);
+        if ($jumlah = Chart::where('barang_id', $request['id_barang'])->where('akun_id', $id)->first()) {
+            Chart::where('barang_id', $request['id_barang'])->where('akun_id', $id)->update([
+                'jumlah' => $request['jumlah']+$jumlah['jumlah'],
+            ]);
+        } else {
+            Chart::create([
+                'akun_id' => $id,
+                'barang_id' => $request->get('id_barang'),
+                'jumlah' => $request->get('jumlah'),
+            ]);
+        }
 
         return response()->json(['Data berhasil ditambah'], 200);
     }
@@ -42,7 +47,7 @@ class ChartController extends Controller
     public function index()
     {
         $id = auth()->user()->id;
-        $data = Chart::where('id_akun', $id)->get();
+        $data = Chart::where('akun_id', $id)->get();
         $data->load('barang');
         foreach ($data as $value) {
             $value['toko'] = $value['barang']->load('toko')->toko;

@@ -35,26 +35,41 @@ class TransaksiController extends Controller
 
     public function bayar(Request $request)
     {
-        if (is_array($request['id_barang'])) {
-            $total_harga = 0;
+        if (count($request['id_barang']) >= 2) {
+            // $total_harga = 0;
             foreach ($request['id_barang'] as $key => $value) {
-                // echo "barang banyak";
-                $data = Barang::find($request['id_barang']);
-                $total_harga = $total_harga + ($data['harga']*$request['jumlah']);
+                $data = Barang::find($request['id_barang'][$key]);
+                $total_harga = 0;
+                $total_harga = $total_harga + ($data['harga']*$request['jumlah'][$key]);
+                $id = auth()->user()->id;
+                Chart::where("id_barang", $request['id_barang'][$key])->where('id_akun', $id)->delete();
+                $alamat = AlamatUser::select("id")->where('user_id', (Profile::select('id')->where('akun_id', $id)->first()->id))->where('status', 'eneble')->first()->id;
+                $transaksi[] = Transaksi::create([
+                    'tgl_transaksi' => now(),
+                    'barang_id' => $request['id_barang'][$key],
+                    'toko_id' => $data['toko_id'],
+                    'keterangan' => $request['keterangan'][$key],
+                    'jumlah' => $request['jumlah'][$key],
+                    'total_harga' => $total_harga,
+                    'akun_id' => $id,
+                    'alamat_id' => $alamat,
+                    'status' => 'pembayaran',
+                ]);
             }
+            return response()->json(compact('transaksi'), 200);
         } else {
             // echo now();
-            $data = Barang::find($request['id_barang']);
+            $data = Barang::find($request['id_barang'][0]);
             $total_harga = 0;
-            $total_harga = $total_harga + ($data['harga']*$request['jumlah']);
+            $total_harga = $total_harga + ($data['harga']*$request['jumlah'][0]);
             $id = auth()->user()->id;
             $alamat = AlamatUser::select("id")->where('user_id', (Profile::select('id')->where('akun_id', $id)->first()->id))->where('status', 'eneble')->first()->id;
             $transaksi = Transaksi::create([
                 'tgl_transaksi' => now(),
-                'barang_id' => $request['id_barang'],
+                'barang_id' => $request['id_barang'][0],
                 'toko_id' => $data['toko_id'],
-                'keterangan' => $request['keterangan'],
-                'jumlah' => $request['jumlah'],
+                'keterangan' => $request['keterangan'][0],
+                'jumlah' => $request['jumlah'][0],
                 'total_harga' => $total_harga,
                 'akun_id' => $id,
                 'alamat_id' => $alamat,
@@ -63,5 +78,10 @@ class TransaksiController extends Controller
             return response()->json(compact('transaksi'), 200);
         }
         
+    }
+
+    public function sudahbayar($request)
+    {
+        # code...
     }
 }

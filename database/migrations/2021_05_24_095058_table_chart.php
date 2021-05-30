@@ -15,8 +15,8 @@ class TableChart extends Migration
     {
         Schema::create('tb_chart', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_akun');
-            $table->foreignId('id_barang');
+            $table->foreignId('akun_id');
+            $table->foreignId('barang_id');
             $table->integer('jumlah');
             $table->timestamps(0);
         });

@@ -17,9 +17,9 @@ class AlamatUserController extends Controller
      */
     public function index()
     {
-        $id = auth()->user()->load("profile")->profile->id;
+        $id = auth()->user()->id;
 
-        $data = AlamatUser::where('user_id', $id)->get();
+        $data = AlamatUser::where('akun_id', $id)->get();
         $data = $this->sort_array($data, "id");
         return response()->json(compact("data"), 200);
     }
@@ -43,9 +43,9 @@ class AlamatUserController extends Controller
 
     public function cekAlamat(Request $request)
     {
-        $id = auth()->user()->load("profile")->profile->id;
+        $id = auth()->user()->id;
         // echo auth()->user()->load("profile");
-        if (! AlamatUser::where('user_id', $id)->where("jns_alamat", "Alamat Utama")->first()) {
+        if (! AlamatUser::where('akun_id', $id)->where("jns_alamat", "Alamat Utama")->first()) {
             // echo "alamat baru";
             return $this->store($request, $id);
 
@@ -70,7 +70,7 @@ class AlamatUserController extends Controller
         }
 
 
-        $id = auth()->user()->load("profile")->profile->id;
+        $id = auth()->user()->id;
         
         AlamatUser::create([
             'penerima' => $request->get('penerima'),
@@ -78,7 +78,7 @@ class AlamatUserController extends Controller
             'alamat' => $request->get('alamat'),
             'jns_alamat' => $request->get('jns_alamat'),
             'status' => 'diseble',
-            'user_id' => $id,
+            'akun_id' => $id,
         ]);
         return response()->json(["Data Berhasil Disimpan
         "], 200);
@@ -137,7 +137,7 @@ class AlamatUserController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $data = AlamatUser::where("user_id", $id)->where("jns_alamat", "Alamat Utama")->update([
+        $data = AlamatUser::where("akun_id", $id)->where("jns_alamat", "Alamat Utama")->update([
             'alamat' => $request->get('alamat')
         ]);
         return response()->json(["Data Berhasil Dirubah"], 200);
@@ -156,8 +156,8 @@ class AlamatUserController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
         
-        $id = auth()->user()->load("profile")->profile->id;
-        $data = AlamatUser::where("user_id", $id)->where("id", $id_alamat)->update([
+        $id = auth()->user()->id;
+        $data = AlamatUser::where("akun_id", $id)->where("id", $id_alamat)->update([
             'alamat' => $request->get('alamat'),
             'jns_alamat' => $request->get('jns_alamat'),
             'penerima' => $request->get('penerima'),
@@ -180,9 +180,9 @@ class AlamatUserController extends Controller
     public function aktifAlamat($id_alamat)
     {
         
-        $id = auth()->user()->load("profile")->profile->id;
+        $id = auth()->user()->id;
 
-        AlamatUser::where('user_id', $id)->update([
+        AlamatUser::where('akun_id', $id)->update([
             'status' => "diseble",
         ]);
 

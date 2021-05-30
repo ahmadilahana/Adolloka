@@ -20,7 +20,7 @@ class TableAlamatUser extends Migration
             $table->string('alamat')->nullable();
             $table->string('jns_alamat')->nullable();
             $table->enum('status', ['eneble', 'diseble'])->nullable();
-            $table->foreignId('user_id');
+            $table->foreignId('akun_id');
         });
     }
 

@@ -20,6 +20,6 @@ class Barang extends Model
 
     public function chart()
     {
-        return $this->hasMany(Chart::class, "id_barang");
+        return $this->hasMany(Chart::class, "barang_id");
     }
 }

@@ -10,10 +10,10 @@ class Chart extends Model
     use HasFactory;
 
     protected $table = "tb_chart";
-    protected $fillable = ['id_akun', 'id_barang', 'jumlah'];
+    protected $fillable = ['akun_id', 'barang_id', 'jumlah'];
 
     public function barang()
     {
-        return $this->belongsTo(Barang::class, "id_barang");
+        return $this->belongsTo(Barang::class, "barang_id");
     }
 }
