@@ -17,10 +17,6 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class, 'akun_id');
     }
-    public function alamat()
-    {
-        return $this->hasMany(AlamatUser::class, 'user_id');
-    }
     public function foto()
     {
         return $this->belongsto(FotoProfile::class, 'profile_id');

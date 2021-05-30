@@ -17,19 +17,29 @@ class ProfileController extends Controller
         // $cek = Profile::where('akun_id', $id)->first();
         // $profile = Profile::where("akun_id", "=", $user->id)->first();
         $user->load("profile");
-        if($profile = $user["profile"]){
+        if(($profile = $user["profile"]) || ($load_alamat = $user->Load("alamat"))){
             // $profile = $user["profile"];
-            $load_alamat = $user['profile']->Load("alamat");
-            if($load_alamat){
-                $alamat = $this->sort_array($user['profile']['alamat'], "id");
-                unset($profile['alamat']);
+            if($load_alamat && $profile){
+                $alamat = $this->sort_array($user['alamat'], "id");
+                unset($user['alamat']);
+                $foto = $profile->load('foto');
+                $user->load('toko');
+                $toko = $user['toko'];
+                unset($user['toko']);
+                unset($user['profile']);
+                return response()->json(compact("user", "profile", "alamat", "toko"), 200);
+            }elseif ($load_alamat) {
+                $alamat = $this->sort_array($user['alamat'], "id");
+                unset($user['alamat']);
+                return response()->json(compact("user", "profile", "alamat", "toko"), 200);
+            }else {
+                $foto = $profile->load('foto');
+                $user->load('toko');
+                $toko = $user['toko'];
+                unset($user['toko']);
+                unset($user['profile']);
+                return response()->json(compact("user", "profile", "alamat", "toko"), 200);
             }
-            $foto = $profile->load('foto');
-            $user->load('toko');
-            $toko = $user['toko'];
-            unset($user['toko']);
-            unset($user['profile']);
-            return response()->json(compact("user", "profile", "alamat", "toko"), 200);
         }else{
             return response()->json(compact("user"), 200);
         }

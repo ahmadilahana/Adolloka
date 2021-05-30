@@ -88,11 +88,17 @@ class AlamatUserController extends Controller
         
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
-            'penerima' => 'required|string',
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
+
+        if (condition) {
+            # code...
+        } else {
+            # code...
+        }
+        
 
         // echo $id;
         // dd($no_hp);

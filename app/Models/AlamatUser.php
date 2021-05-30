@@ -9,11 +9,11 @@ class AlamatUser extends Model
 {
     use HasFactory;
     protected $table = "tb_almt_user";
-    protected $fillable = ['alamat', 'jns_alamat', 'status', 'user_id', 'penerima', 'no_hp'];
+    protected $fillable = ['alamat', 'jns_alamat', 'status', 'akun_id', 'penerima', 'no_hp'];
     public $timestamps = false;
 
     public function user()
     {
-        return $this->belongsTo(Profile::class, 'user_id');
+        return $this->belongsTo(Akun::class, 'akun_id');
     }
 }

@@ -56,6 +56,11 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
     
+    public function alamat()
+    {
+        return $this->hasMany(AlamatUser::class, 'akun_id');
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class, 'akun_id');
