@@ -89,7 +89,6 @@ class AlamatUserController extends Controller
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
             'penerima' => 'required|string',
-            'no_hp' => 'required|numeric',
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
@@ -99,7 +98,7 @@ class AlamatUserController extends Controller
         // dd($no_hp);
         $alamat = AlamatUser::create([
             'penerima' => $request->get('penerima'),
-            'no_hp' => $request->get('no_hp'),
+            'no_hp' => auth()->user()->no_hp,
             'alamat' => $request->get('alamat'),
             'jns_alamat' => 'Alamat Utama',
             'status' => 'eneble',
