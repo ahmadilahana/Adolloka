@@ -20,7 +20,7 @@ class tb_alamat_user extends Seeder
                 'alamat' => 'semarang',
                 'jns_alamat' => 'Alamat Utama',
                 'status' => 'eneble',
-                'user_id' => 1
+                'akun_id' => 1
         ]);
         AlamatUser::create([
                 'penerima' => "tes2",
@@ -28,7 +28,7 @@ class tb_alamat_user extends Seeder
                 'alamat' => 'semarang',
                 'jns_alamat' => 'Alamat Utama',
                 'status' => 'eneble',
-                'user_id' => 2
+                'akun_id' => 2
         ]);
         AlamatUser::create([
                 'penerima' => "tes3",
@@ -36,7 +36,7 @@ class tb_alamat_user extends Seeder
                 'alamat' => 'semarang',
                 'jns_alamat' => 'Alamat Utama',
                 'status' => 'eneble',
-                'user_id' => 3
+                'akun_id' => 3
         ]);
     }
 }
