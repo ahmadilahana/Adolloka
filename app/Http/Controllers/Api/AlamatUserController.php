@@ -123,36 +123,24 @@ class AlamatUserController extends Controller
         ", compact('alamat')], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kota' => 'required|string',
+            'provinsi' => 'required|string',
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
 
         $data = AlamatUser::where("akun_id", $id)->where("jns_alamat", "Alamat Utama")->update([
-            'alamat' => $request->get('alamat')
+            'alamat' => $request->get('alamat'),
+            'kecamatan' => $request->get('kecamatan'),
+            'kota' => $request->get('kota'),
+            'provinsi' => $request->get('provinsi'),
         ]);
         return response()->json(["Data Berhasil Dirubah"], 200);
     }
