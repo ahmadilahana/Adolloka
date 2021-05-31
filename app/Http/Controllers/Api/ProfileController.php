@@ -33,14 +33,14 @@ class ProfileController extends Controller
             }elseif ($load_alamat) {
                 $alamat = $this->sort_array($user['alamat'], "id");
                 unset($user['alamat']);
-                return response()->json(compact("user", "profile", "alamat", "toko"), 200);
+                return response()->json(compact("user", "alamat"), 200);
             }else {
                 $foto = $profile->load('foto');
                 $user->load('toko');
                 $toko = $user['toko'];
                 unset($user['toko']);
                 unset($user['profile']);
-                return response()->json(compact("user", "profile", "alamat", "toko"), 200);
+                return response()->json(compact("user", "profile", "toko"), 200);
             }
         }else{
             return response()->json(compact("user"), 200);
