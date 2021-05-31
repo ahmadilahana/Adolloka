@@ -17,7 +17,9 @@ class ProfileController extends Controller
         // $cek = Profile::where('akun_id', $id)->first();
         // $profile = Profile::where("akun_id", "=", $user->id)->first();
         $user->load("profile");
-        if(($profile = $user["profile"]) || ($load_alamat = $user->Load("alamat"))){
+        $load_alamat = $user->Load("alamat");
+        $profile = $user["profile"];
+        if(($profile) || ($load_alamat)){
             // $profile = $user["profile"];
             if($load_alamat && $profile){
                 $alamat = $this->sort_array($user['alamat'], "id");
