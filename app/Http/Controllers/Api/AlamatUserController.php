@@ -93,22 +93,22 @@ class AlamatUserController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        if (condition) {
-            # code...
+        if ($profile = Profile::where('akun_id', $id)->first()) {
+            $penerima = $profile['nama']; 
         } else {
-            # code...
+            $penerima = auth()->user()->username;
         }
         
 
         // echo $id;
         // dd($no_hp);
         $alamat = AlamatUser::create([
-            'penerima' => $request->get('penerima'),
+            'penerima' => $penerima,
             'no_hp' => auth()->user()->no_hp,
             'alamat' => $request->get('alamat'),
             'jns_alamat' => 'Alamat Utama',
             'status' => 'eneble',
-            'user_id' => $id,
+            'akun_id' => $id,
         ]);
         return response()->json(["Data Berhasil Disimpan
         ", compact('alamat')], 200);
