@@ -14,7 +14,7 @@ class TableFotoBarang extends Migration
     public function up()
     {
         Schema::create('tb_ft_barang', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->unique();
             $table->string('foto');
             $table->foreignId('barang_id');
         });

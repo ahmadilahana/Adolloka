@@ -60,9 +60,11 @@ class AlamatUserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
+            'desa' => 'required|string',
             'kecamatan' => 'required|string',
             'kota' => 'required|string',
             'provinsi' => 'required|string',
+            'kd_pos' => 'required|numeric',
             'jns_alamat' => 'required|string',
             'penerima' => 'required|string',
             'no_hp' => 'required|numeric',
@@ -79,9 +81,11 @@ class AlamatUserController extends Controller
             'penerima' => $request->get('penerima'),
             'no_hp' => $request->get('no_hp'),
             'alamat' => $request->get('alamat'),
+            'desa' => $request->get('desa'),
             'kecamatan' => $request->get('kecamatan'),
             'kota' => $request->get('kota'),
             'provinsi' => $request->get('provinsi'),
+            'kd_pos' => $request->get('kd_pos'),
             'jns_alamat' => $request->get('jns_alamat'),
             'status' => 'diseble',
             'akun_id' => $id,
@@ -94,6 +98,11 @@ class AlamatUserController extends Controller
         
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
+            'desa' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kota' => 'required|string',
+            'provinsi' => 'required|string',
+            'kd_pos' => 'required|numeric',
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
@@ -112,9 +121,11 @@ class AlamatUserController extends Controller
             'penerima' => $penerima,
             'no_hp' => auth()->user()->no_hp,
             'alamat' => $request->get('alamat'),
+            'desa' => $request->get('desa'),
             'kecamatan' => $request->get('kecamatan'),
             'kota' => $request->get('kota'),
             'provinsi' => $request->get('provinsi'),
+            'kd_pos' => $request->get('kd_pos'),
             'jns_alamat' => 'Alamat Utama',
             'status' => 'eneble',
             'akun_id' => $id,
@@ -128,9 +139,11 @@ class AlamatUserController extends Controller
         
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
+            'desa' => 'required|string',
             'kecamatan' => 'required|string',
             'kota' => 'required|string',
             'provinsi' => 'required|string',
+            'kd_pos' => 'required|numeric',
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
@@ -138,9 +151,11 @@ class AlamatUserController extends Controller
 
         $data = AlamatUser::where("akun_id", $id)->where("jns_alamat", "Alamat Utama")->update([
             'alamat' => $request->get('alamat'),
+            'desa' => $request->get('desa'),
             'kecamatan' => $request->get('kecamatan'),
             'kota' => $request->get('kota'),
             'provinsi' => $request->get('provinsi'),
+            'kd_pos' => $request->get('kd_pos'),
         ]);
         return response()->json(["Data Berhasil Dirubah"], 200);
     }
@@ -149,9 +164,11 @@ class AlamatUserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
+            'desa' => 'required|string',
             'kecamatan' => 'required|string',
             'kota' => 'required|string',
             'provinsi' => 'required|string',
+            'kd_pos' => 'required|numeric',
             'jns_alamat' => 'required|string',
             'penerima' => 'required|string',
             'no_hp' => 'required|numeric',
@@ -164,9 +181,11 @@ class AlamatUserController extends Controller
         $id = auth()->user()->id;
         $data = AlamatUser::where("akun_id", $id)->where("id", $id_alamat)->update([
             'alamat' => $request->get('alamat'),
+            'desa' => $request->get('desa'),
             'kecamatan' => $request->get('kecamatan'),
             'kota' => $request->get('kota'),
             'provinsi' => $request->get('provinsi'),
+            'kd_pos' => $request->get('kd_pos'),
             'jns_alamat' => $request->get('jns_alamat'),
             'penerima' => $request->get('penerima'),
             'no_hp' => $request->get('no_hp'),
