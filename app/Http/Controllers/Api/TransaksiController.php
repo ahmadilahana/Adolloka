@@ -55,6 +55,10 @@ class TransaksiController extends Controller
                     'alamat_id' => $alamat,
                     'status' => 'pembayaran',
                 ]);
+
+                $form = $request->all();
+
+                $form['nama']
             }
             return response()->json(compact('transaksi'), 200);
         } else {

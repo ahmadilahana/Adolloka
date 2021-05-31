@@ -17,7 +17,10 @@ class tb_alamat_user extends Seeder
         AlamatUser::create([
                 'penerima' => "tes1",
                 'no_hp' => '08130813013',
-                'alamat' => 'semarang',
+                'alamat' => 'jalan sehat sentosa',
+                'kecamatan' => 'boja',
+                'kota' => 'semarang',
+                'provinsi' => 'jawa tengah',
                 'jns_alamat' => 'Alamat Utama',
                 'status' => 'eneble',
                 'akun_id' => 1
@@ -25,7 +28,10 @@ class tb_alamat_user extends Seeder
         AlamatUser::create([
                 'penerima' => "tes2",
                 'no_hp' => '08130813013',
-                'alamat' => 'semarang',
+                'alamat' => 'jalan sehat sentosa',
+                'kecamatan' => 'boja',
+                'kota' => 'semarang',
+                'provinsi' => 'jawa tengah',
                 'jns_alamat' => 'Alamat Utama',
                 'status' => 'eneble',
                 'akun_id' => 2
@@ -33,7 +39,10 @@ class tb_alamat_user extends Seeder
         AlamatUser::create([
                 'penerima' => "tes3",
                 'no_hp' => '08130813013',
-                'alamat' => 'semarang',
+                'alamat' => 'jalan sehat sentosa',
+                'kecamatan' => 'boja',
+                'kota' => 'semarang',
+                'provinsi' => 'jawa tengah',
                 'jns_alamat' => 'Alamat Utama',
                 'status' => 'eneble',
                 'akun_id' => 3

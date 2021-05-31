@@ -18,6 +18,9 @@ class TableAlamatUser extends Migration
             $table->string('penerima')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('alamat')->nullable();
+            $table->string('kecamatan')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('provinsi')->nullable();
             $table->string('jns_alamat')->nullable();
             $table->enum('status', ['eneble', 'diseble'])->nullable();
             $table->foreignId('akun_id');

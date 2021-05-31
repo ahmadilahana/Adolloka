@@ -60,6 +60,9 @@ class AlamatUserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kota' => 'required|string',
+            'provinsi' => 'required|string',
             'jns_alamat' => 'required|string',
             'penerima' => 'required|string',
             'no_hp' => 'required|numeric',
@@ -76,6 +79,9 @@ class AlamatUserController extends Controller
             'penerima' => $request->get('penerima'),
             'no_hp' => $request->get('no_hp'),
             'alamat' => $request->get('alamat'),
+            'kecamatan' => $request->get('kecamatan'),
+            'kota' => $request->get('kota'),
+            'provinsi' => $request->get('provinsi'),
             'jns_alamat' => $request->get('jns_alamat'),
             'status' => 'diseble',
             'akun_id' => $id,
@@ -106,6 +112,9 @@ class AlamatUserController extends Controller
             'penerima' => $penerima,
             'no_hp' => auth()->user()->no_hp,
             'alamat' => $request->get('alamat'),
+            'kecamatan' => $request->get('kecamatan'),
+            'kota' => $request->get('kota'),
+            'provinsi' => $request->get('provinsi'),
             'jns_alamat' => 'Alamat Utama',
             'status' => 'eneble',
             'akun_id' => $id,
@@ -152,6 +161,9 @@ class AlamatUserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'alamat' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kota' => 'required|string',
+            'provinsi' => 'required|string',
             'jns_alamat' => 'required|string',
             'penerima' => 'required|string',
             'no_hp' => 'required|numeric',
@@ -164,6 +176,9 @@ class AlamatUserController extends Controller
         $id = auth()->user()->id;
         $data = AlamatUser::where("akun_id", $id)->where("id", $id_alamat)->update([
             'alamat' => $request->get('alamat'),
+            'kecamatan' => $request->get('kecamatan'),
+            'kota' => $request->get('kota'),
+            'provinsi' => $request->get('provinsi'),
             'jns_alamat' => $request->get('jns_alamat'),
             'penerima' => $request->get('penerima'),
             'no_hp' => $request->get('no_hp'),
