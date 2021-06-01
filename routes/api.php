@@ -23,13 +23,13 @@ Route::post('/login', 'Api\UserController@login');
 
 
 //get barang
-Route::get('/barang', 'BarangController@index');
+Route::get('/barang', 'Api/BarangController@index');
 
 //get satu barang
-Route::get('/barang/{id_barang}/show', 'BarangController@show');
+Route::get('/barang/{id_barang}/show', 'Api/BarangController@show');
 
 //get Kategori Barang
-Route::get('/barang/kategori', 'BarangController@kategori');
+Route::get('/barang/kategori', 'Api/BarangController@kategori');
 
 Route::group([
     'middleware' => 'jwt.verify',
