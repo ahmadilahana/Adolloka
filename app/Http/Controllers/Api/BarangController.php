@@ -18,6 +18,7 @@ class BarangController extends Controller
     public function index()
     {
         $data = Barang::all()->load('toko');
+        $data->load('foto');
         return response()->json(compact('data'), 200);
     }
 

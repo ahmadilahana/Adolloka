@@ -106,12 +106,13 @@ class TokoController extends Controller
                 $foto_id = $result->getPublicId();
                 $foto = $result->getSecurePath();
                 $foto = FotoBarang::create([
-                    'foto' => 
+                    'id' => $foto_id,
+                    'foto' => $foto,
+                    'barang_id' => $data['id'],
                 ]);
             }
         }
-        
-        // return response()->json(['data berhasil ditambah'], 200);
+        return response()->json(['data berhasil ditambah'], 200);
     }
 
     public function updateBarang(Request $request, $id_barang)

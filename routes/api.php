@@ -21,6 +21,16 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', 'Api\UserController@register');
 Route::post('/login', 'Api\UserController@login');
 
+
+//get barang
+Route::get('/barang', 'BarangController@index');
+
+//get satu barang
+Route::get('/barang/{id_barang}/show', 'BarangController@show');
+
+//get Kategori Barang
+Route::get('/barang/kategori', 'BarangController@kategori');
+
 Route::group([
     'middleware' => 'jwt.verify',
     'namespace' => 'Api'
@@ -73,6 +83,9 @@ Route::group([
     //get data barang toko
     Route::get('/toko/barang', 'TokoController@getbarang');
     
+    //upload foto barang
+    Route::post('/toko/barang/foto/hapus', 'FotoBarangController@hapus');
+    
     //create data barang toko
     Route::post('/toko/barang/create', 'TokoController@tambahBarang');
 
@@ -81,15 +94,6 @@ Route::group([
 
     //update data toko
     Route::post('/toko/update', 'TokoController@cektoko');
-
-    //get barang
-    Route::get('/barang', 'BarangController@index');
-
-    //get satu barang
-    Route::get('/barang/{id_barang}/show', 'BarangController@show');
-
-    //get Kategori Barang
-    Route::get('/barang/kategori', 'BarangController@kategori');
 
     //create chart
     Route::post('/chart/add', 'ChartController@add');

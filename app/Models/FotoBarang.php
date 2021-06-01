@@ -15,4 +15,8 @@ class FotoBarang extends Model
     protected $keyType = 'string';
     public $timestamps = false;
 
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class, "barang_id");
+    }
 }
