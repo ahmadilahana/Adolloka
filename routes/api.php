@@ -83,8 +83,11 @@ Route::group([
     //get data barang toko
     Route::get('/toko/barang', 'TokoController@getbarang');
     
-    //upload foto barang
+    //hapus foto barang
     Route::post('/toko/barang/foto/hapus', 'FotoBarangController@hapus');
+    
+    //upload foto barang
+    Route::post('/toko/barang/foto/tambah', 'FotoBarangController@tambah');
     
     //create data barang toko
     Route::post('/toko/barang/create', 'TokoController@tambahBarang');

@@ -25,8 +25,9 @@ class FotoBarangController extends Controller
             $foto = FotoBarang::create([
                 'id' => $foto_id,
                 'foto' => $foto,
-                'barang_id' => $request['id'],
+                'barang_id' => $request['id_barang'],
             ]);
         }
+        return response()->json('foto berhasil ditambahkan', 200);
     }
 }
