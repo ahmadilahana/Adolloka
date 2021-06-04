@@ -16,17 +16,35 @@ class tb_toko extends Seeder
     {
         Toko::create([
             "nama_toko" => "adolloka 1",
-            "alamat" => "semarang",
+            'alamat' => 'jalan sehat sentosa',
+            'desa' => 'sijeruk',
+            'kecamatan' => 'boja',
+            'kota' => 'semarang',
+            'provinsi' => 'jawa tengah',
+            'kd_pos' => 14045,
+            "domain_toko" => "adolloka-1",
             "akun_id" => 1
         ]);
         Toko::create([
             "nama_toko" => "adolloka 2",
-            "alamat" => "magelang",
+            'alamat' => 'jalan sehat sentosa',
+            'desa' => 'sijeruk',
+            'kecamatan' => 'boja',
+            'kota' => 'semarang',
+            'provinsi' => 'jawa tengah',
+            'kd_pos' => 14045,
+            "domain_toko" => "adolloka-2",
             "akun_id" => 2
         ]);
         Toko::create([
             "nama_toko" => "adolloka 3",
-            "alamat" => "kediri",
+            'alamat' => 'jalan sehat sentosa',
+            'desa' => 'sijeruk',
+            'kecamatan' => 'boja',
+            'kota' => 'semarang',
+            'provinsi' => 'jawa tengah',
+            'kd_pos' => 14045,
+            "domain_toko" => "adolloka-3",
             "akun_id" => 3
         ]);
     }

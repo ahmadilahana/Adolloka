@@ -16,7 +16,13 @@ class TableToko extends Migration
         Schema::create('tb_toko', function (Blueprint $table) {
             $table->id();
             $table->string('nama_toko');
-            $table->string('alamat');
+            $table->string('alamat')->nullable();
+            $table->string('desa')->nullable();
+            $table->string('kecamatan')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('provinsi')->nullable();
+            $table->string('kd_pos')->nullable();
+            $table->string('domain_toko');
             $table->foreignId('akun_id');
         });
     }

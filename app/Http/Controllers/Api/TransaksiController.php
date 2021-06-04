@@ -36,14 +36,15 @@ class TransaksiController extends Controller
     public function bayar(Request $request)
     {
         if (count($request['id_barang']) >= 2) {
-            // $total_harga = 0;
+            $total_semua_harga = 0;
             foreach ($request['id_barang'] as $key => $value) {
                 $data = Barang::find($request['id_barang'][$key]);
                 $total_harga = 0;
                 $total_harga = $total_harga + ($data['harga']*$request['jumlah'][$key]);
+                $total_semua_harga += $total_harga;
                 $id = auth()->user()->id;
-                Chart::where("id_barang", $request['id_barang'][$key])->where('id_akun', $id)->delete();
-                $alamat = AlamatUser::select("id")->where('user_id', (Profile::select('id')->where('akun_id', $id)->first()->id))->where('status', 'eneble')->first()->id;
+                Chart::where("barang_id", $request['id_barang'][$key])->where('akun_id', $id)->delete();
+                $alamat = AlamatUser::select("id")->where('akun_id', $id)->where('status', 'eneble')->first()->id;
                 $transaksi[] = Transaksi::create([
                     'tgl_transaksi' => now(),
                     'barang_id' => $request['id_barang'][$key],
@@ -55,12 +56,8 @@ class TransaksiController extends Controller
                     'alamat_id' => $alamat,
                     'status' => 'pembayaran',
                 ]);
-
-                $form = $request->all();
-
-                $form['nama']
             }
-            return response()->json(compact('transaksi'), 200);
+            return response()->json(compact('transaksi', 'total_semua_harga'), 200);
         } else {
             // echo now();
             $data = Barang::find($request['id_barang'][0]);

@@ -25,8 +25,14 @@ class TokoController extends Controller
         $id = auth()->user()->id;
 
         $validator = Validator::make($request->all(), [
-            'nama' => 'required|string|max:255',
+            'nama' => 'required|string',
             'alamat' => 'required|string',
+            'desa' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kota' => 'required|string',
+            'provinsi' => 'required|string',
+            'kd_pos' => 'required|numeric',
+            'domain_toko' => 'required|numeric',
         ]);
 
         if($validator->fails()){
@@ -47,6 +53,12 @@ class TokoController extends Controller
         $toko = Toko::create([
             "nama_toko" => $request->get("nama"),
             "alamat" => $request->get("alamat"),
+            'desa' => $request->get('desa'),
+            'kecamatan' => $request->get('kecamatan'),
+            'kota' => $request->get('kota'),
+            'provinsi' => $request->get('provinsi'),
+            'kd_pos' => $request->get('kd_pos'),
+            'domain_toko' => $request->get('domain_toko'),
             "akun_id" => $id,
         ]);
         
@@ -59,6 +71,12 @@ class TokoController extends Controller
         $toko = tap(Toko::where("akun_id", "=", $id))->update([
             "nama_toko" => $request->get("nama"),
             "alamat" => $request->get("alamat"),
+            'desa' => $request->get('desa'),
+            'kecamatan' => $request->get('kecamatan'),
+            'kota' => $request->get('kota'),
+            'provinsi' => $request->get('provinsi'),
+            'kd_pos' => $request->get('kd_pos'),
+            'domain_toko' => $request->get('domain_toko'),
         ])->first();
         
         return response()->json(["toko" => $toko], 200);
