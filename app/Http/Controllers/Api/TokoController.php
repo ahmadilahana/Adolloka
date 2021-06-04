@@ -32,7 +32,7 @@ class TokoController extends Controller
             'kota' => 'required|string',
             'provinsi' => 'required|string',
             'kd_pos' => 'required|numeric',
-            'domain_toko' => 'required|numeric',
+            'domain_toko' => 'required|string',
         ]);
 
         if($validator->fails()){

@@ -46,6 +46,7 @@ class TransaksiController extends Controller
                 Chart::where("barang_id", $request['id_barang'][$key])->where('akun_id', $id)->delete();
                 $alamat = AlamatUser::select("id")->where('akun_id', $id)->where('status', 'eneble')->first()->id;
                 $transaksi[] = Transaksi::create([
+                    'id' => date('Ymdhis') . $id,
                     'tgl_transaksi' => now(),
                     'barang_id' => $request['id_barang'][$key],
                     'toko_id' => $data['toko_id'],
@@ -66,6 +67,7 @@ class TransaksiController extends Controller
             $id = auth()->user()->id;
             $alamat = AlamatUser::select("id")->where('user_id', (Profile::select('id')->where('akun_id', $id)->first()->id))->where('status', 'eneble')->first()->id;
             $transaksi = Transaksi::create([
+                'id' => date('Ymdhis') . $id,
                 'tgl_transaksi' => now(),
                 'barang_id' => $request['id_barang'][0],
                 'toko_id' => $data['toko_id'],
@@ -81,8 +83,8 @@ class TransaksiController extends Controller
         
     }
 
-    public function sudahbayar($request)
+    public function sudahbayar(Request $request)
     {
-        # code...
+        echo date("Ymdhsi");
     }
 }

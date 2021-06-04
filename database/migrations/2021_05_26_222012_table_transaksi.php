@@ -14,7 +14,7 @@ class TableTransaksi extends Migration
     public function up()
     {
         Schema::create('tb_transaksi', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id')->primary();
             $table->timestamp("tgl_transaksi");
             $table->foreignId('barang_id');
             $table->foreignId('toko_id');

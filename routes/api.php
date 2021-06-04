@@ -118,4 +118,7 @@ Route::group([
     
     //get bayar
     Route::post('/bayar ', 'TransaksiController@bayar');
+    
+    //get sudah bayar
+    Route::post('/sudah_bayar ', 'TransaksiController@sudahbayar');
 });
