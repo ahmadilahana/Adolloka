@@ -99,16 +99,16 @@ Route::group([
     Route::post('/toko/update', 'TokoController@cektoko');
 
     //create chart
-    Route::post('/chart/add', 'ChartController@add');
+    Route::post('/cart/add', 'CartController@add');
 
     //delete chart
-    Route::post('/chart/{id}/delete', 'ChartController@delete');
+    Route::post('/cart/{id}/delete', 'CartController@delete');
     
     //update chart
-    Route::post('/chart/{id}/edit', 'ChartController@edit');
+    Route::post('/cart/{id}/edit', 'CartController@edit');
     
     //get chart
-    Route::get('/chart', 'ChartController@index');
+    Route::get('/cart', 'CartController@index');
     
     //get checkout
     Route::post('/checkout', 'TransaksiController@checkout');

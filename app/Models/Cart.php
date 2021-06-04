@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chart extends Model
+class Cart extends Model
 {
     use HasFactory;
 
-    protected $table = "tb_chart";
+    protected $table = "tb_cart";
     protected $fillable = ['akun_id', 'barang_id', 'jumlah'];
 
     public function barang()

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TableChart extends Migration
+class TableCart extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class TableChart extends Migration
      */
     public function up()
     {
-        Schema::create('tb_chart', function (Blueprint $table) {
+        Schema::create('tb_cart', function (Blueprint $table) {
             $table->id();
             $table->foreignId('akun_id');
             $table->foreignId('barang_id');

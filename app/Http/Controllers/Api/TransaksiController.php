@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Chart;
+use App\Models\Cart;
 use App\Models\Barang;
 use App\Models\Transaksi;
 use App\Models\Profile;
