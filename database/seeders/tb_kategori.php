@@ -32,7 +32,7 @@ class tb_kategori extends Seeder
         ]);
         DB::table('tb_kat_barang')->insert([
             'kategori' => 'Olahraga',
-            'slug' => 'elektronik'
+            'slug' => 'Olahraga'
         ]);
         DB::table('tb_kat_barang')->insert([
             'kategori' => 'Alat Rumah Tangga',
