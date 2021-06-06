@@ -39,7 +39,8 @@ class BarangController extends Controller
     public function barangPerKategori($id_kategori)
     {
         $kat = KategoriBarang::find($id_kategori);
-        $kat->load('barang', 'toko', 'foto');
+        $kat->load('barang');
+        $kat['barang']->load('toko', 'foto');
         return response()->json(compact('kat'), 200);
     }
 }
