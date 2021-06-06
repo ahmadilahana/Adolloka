@@ -27,4 +27,14 @@ class Barang extends Model
     {
         return $this->hasMany(FotoBarang::class, "barang_id");
     }
+
+    public function transaksi()
+    {
+        return $this->hasOne(Transaksi::class, "barang_id");
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Barang::class, "kategori_id");
+    }
 }

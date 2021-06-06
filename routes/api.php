@@ -25,6 +25,9 @@ Route::post('/login', 'Api\UserController@login');
 //get barang
 Route::get('/barang', 'Api\BarangController@index');
 
+//get barang
+Route::get('/barang/kategori/{id_kategori}', 'Api\BarangController@barangPerKategori');
+
 //get satu barang
 Route::get('/barang/{id_barang}/show', 'Api\BarangController@show');
 
@@ -91,16 +94,16 @@ Route::group([
     
     //create data barang toko
     Route::post('/toko/barang/create', 'TokoController@tambahBarang');
-
+    
     //update data barang toko
     Route::post('/toko/barang/{id_barang}/update', 'TokoController@updateBarang');
-
+    
     //update data toko
     Route::post('/toko/update', 'TokoController@cektoko');
-
+    
     //create chart
     Route::post('/cart/add', 'CartController@add');
-
+    
     //delete chart
     Route::post('/cart/{id}/delete', 'CartController@delete');
     
@@ -119,6 +122,25 @@ Route::group([
     //get bayar
     Route::post('/bayar ', 'TransaksiController@bayar');
     
-    //get sudah bayar
+    // sudah bayar
     Route::post('/sudah_bayar ', 'TransaksiController@sudahbayar');
+    
+    // data transaksi user
+    Route::get('/user/transaksi ', 'TransaksiController@index');
+    
+    // edit sudah bayar
+    Route::post('/sudah_bayar/edit ', 'TransaksiController@editsudahbayar');
+    
+    //data transaksi toko
+    Route::get('/toko/transaksi', 'TransaksiController@transaksitoko');
+    
+    // get detail transaksi
+    Route::get('/transaksi/detail/{id_transksi} ', 'TransaksiController@detailtransaksi');
+    
+    // pembayaran ditolak
+    Route::post('/transaksi/pembayaran-ditolak/{id_transksi} ', 'TransaksiController@pembayaranditolak');
+    
+    // pembayaran diterima
+    Route::post('/transaksi/pembayaran-diterima/{id_transksi} ', 'TransaksiController@pembayaranditerima');
+    
 });

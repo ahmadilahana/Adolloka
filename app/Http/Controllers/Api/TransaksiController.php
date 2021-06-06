@@ -9,6 +9,9 @@ use App\Models\Barang;
 use App\Models\Transaksi;
 use App\Models\Profile;
 use App\Models\AlamatUser;
+use App\Models\BuktiTransaksi;
+use App\Models\Toko;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class TransaksiController extends Controller
 {
@@ -43,7 +46,7 @@ class TransaksiController extends Controller
                 $total_harga = $total_harga + ($data['harga']*$request['jumlah'][$key]);
                 $total_semua_harga += $total_harga;
                 $id = auth()->user()->id;
-                Chart::where("barang_id", $request['id_barang'][$key])->where('akun_id', $id)->delete();
+                Cart::where("barang_id", $request['id_barang'][$key])->where('akun_id', $id)->delete();
                 $alamat = AlamatUser::select("id")->where('akun_id', $id)->where('status', 'eneble')->first()->id;
                 $transaksi[] = Transaksi::create([
                     'id' => date('Ymdhis') . $id,
@@ -67,7 +70,6 @@ class TransaksiController extends Controller
             $id = auth()->user()->id;
             $alamat = AlamatUser::select("id")->where('user_id', (Profile::select('id')->where('akun_id', $id)->first()->id))->where('status', 'eneble')->first()->id;
             $transaksi = Transaksi::create([
-                'id' => date('Ymdhis') . $id,
                 'tgl_transaksi' => now(),
                 'barang_id' => $request['id_barang'][0],
                 'toko_id' => $data['toko_id'],
@@ -85,6 +87,75 @@ class TransaksiController extends Controller
 
     public function sudahbayar(Request $request)
     {
-        echo date("Ymdhsi");
+        
+        $result = $request->file('foto')->storeOnCloudinary('adolloka/bukti_pembayaran');
+        $foto_id = $result->getPublicId();
+        $foto = $result->getSecurePath();
+
+        BuktiTransaksi::create([
+            'id' => $foto_id,
+            'foto' => $foto,
+            'transaksi_id' => $request->get('id_transaksi'),
+        ]);
+
+        Transaksi::find($request['id_transaksi'])->update([
+            'status' => 'sudah dibayar',
+        ]);
+
+        return response()->json('data berhasil disimpan', 200);
+    }
+
+    public function editsudahbayar(Request $request)
+    {
+        $data = BuktiTransaksi::where('transaksi_id', $request['id_transaksi'])->first();
+        // var_dump($data);
+        Cloudinary::destroy($data['id']);
+        $result = $request->file('foto')->storeOnCloudinary('adolloka/bukti_pembayaran');
+        $foto_id = $result->getPublicId();
+        $foto = $result->getSecurePath();
+        $data->update([
+            'id' => $foto_id,
+            'foto' => $foto,
+        ]);
+        return response()->json('data berhasil diubah', 200);
+    }
+    public function index()
+    {
+        $id = auth()->user()->id;
+        $data = Transaksi::where('akun_id', $id)->get()->load('barang');
+
+        return response()->json($data, 200);
+    }
+    
+    public function transaksitoko()
+    {
+        $id = Toko::where('akun_id', auth()->user()->id)->first()->id;
+        $data = Transaksi::where('toko_id', $id)->get()->load('barang'); 
+        return response()->json($data, 200);
+    }
+
+    public function detailtransaksi($id_transaksi)
+    {
+        $data = Transaksi::find($id_transaksi)->load('bukti', 'barang');
+
+        return response()->json($data, 200);
+    }
+
+    public function pembayaranditolak($id_transaksi)
+    {
+        Transaksi::find($id_transaksi)->update([
+            'status' => 'pembayaran ditolak'
+        ]);
+
+        return response()->json("data berhasil dirubah", 200);
+    }
+    
+    public function pembayaranditerima($id_transaksi)
+    {
+        Transaksi::find($id_transaksi)->update([
+            'status' => 'pembayaran diterima'
+        ]);
+
+        return response()->json("data berhasil dirubah", 200);
     }
 }

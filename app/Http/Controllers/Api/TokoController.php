@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Toko;
 use App\Models\Barang;
 use App\Models\FotoBarang;
+use App\Models\Transaksi;
 
 class TokoController extends Controller
 {
@@ -158,11 +159,6 @@ class TokoController extends Controller
             'kategori_id' => $request->get('kategori'),
         ]);
         return response()->json(['data berhasil diubah'], 200);
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function destroy($id)

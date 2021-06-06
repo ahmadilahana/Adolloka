@@ -14,7 +14,7 @@ class TableTransaksi extends Migration
     public function up()
     {
         Schema::create('tb_transaksi', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id('id');
             $table->timestamp("tgl_transaksi");
             $table->foreignId('barang_id');
             $table->foreignId('toko_id');
@@ -23,8 +23,7 @@ class TableTransaksi extends Migration
             $table->double('total_harga');
             $table->foreignId('akun_id');
             $table->foreignId('alamat_id');
-            $table->enum('status', ['pembayaran', 'sudah dibayar','packing', 'pengiriman','diterima']);
-            $table->string('bukti_pembayaran')->nullable();
+            $table->enum('status', ['pembayaran', 'sudah dibayar','pembayaran diterima', 'pembayaran ditolak', 'packing', 'pengiriman','diterima']);
             $table->string('kode_resi')->nullable();
         });
     }
