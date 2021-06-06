@@ -24,7 +24,7 @@ class BarangController extends Controller
 
     public function show($id_barang)
     {
-        $data = Barang::where('id', $id_barang)->first()->load('toko');
+        $data = Barang::where('id', $id_barang)->first()->load('toko','toko','foto');
 
         return response()->json(compact('data'), 200);
     }
