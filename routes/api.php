@@ -143,4 +143,13 @@ Route::group([
     // pembayaran diterima
     Route::post('/transaksi/pembayaran-diterima/{id_transksi} ', 'TransaksiController@pembayaranditerima');
     
+    // packing
+    Route::post('/transaksi/packing/{id_transksi} ', 'TransaksiController@packing');
+    
+    // pengiriman
+    Route::post('/transaksi/pengiriman/{id_transksi} ', 'TransaksiController@pengiriman');
+    
+    // diterima
+    Route::post('/transaksi/diterima/{id_transksi} ', 'TransaksiController@diterima');
+    
 });

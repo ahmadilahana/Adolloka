@@ -158,4 +158,31 @@ class TransaksiController extends Controller
 
         return response()->json("data berhasil dirubah", 200);
     }
+
+    public function packing($id_transaksi)
+    {
+        Transaksi::find($id_transaksi)->update([
+            'status' => 'packing'
+        ]);
+
+        return response()->json("data berhasil dirubah", 200);
+    }
+
+    public function pengiriman($id_transaksi)
+    {
+        Transaksi::find($id_transaksi)->update([
+            'status' => 'pengiriman'
+        ]);
+
+        return response()->json("data berhasil dirubah", 200);
+    }
+    
+    public function diterima($id_transaksi)
+    {
+        Transaksi::find($id_transaksi)->update([
+            'status' => 'diterima'
+        ]);
+
+        return response()->json("data berhasil dirubah", 200);
+    }
 }
