@@ -38,118 +38,54 @@ Route::group([
     'middleware' => 'jwt.verify',
     'namespace' => 'Api'
 ], function($route){
-    //data akun
+
+    //AKUN
     Route::get('/home', 'UserController@getAuthenticatedUser');
-
-    //edit username
     Route::post('/username/update', 'UserController@editUsername');
-    
-    //edit password
     Route::post('/password/update', 'UserController@editPassword');
-
-    //edit email
     Route::post('/email/update', 'UserController@editEmail');
-    
-    //edit no hp
     Route::post('/no_hp/update', 'UserController@editNoHp');
-
-    //data akun dan data profile
+    
+    //ALAMAT & PROFILE
     Route::get('/user', 'ProfileController@index');
-
-    //update data profile
     Route::post('/user/profile/biodata/update', 'ProfileController@cekprofile');
-
-    //create data alamat
-    Route::post('/user/profile/alamat/update', 'AlamatUserController@cekAlamat');
-
-    //get data alamat kirim
-    Route::get('/user/alamat', 'AlamatUserController@index');
-
-    //create data alamat kirim
-    Route::post('/user/alamat/create', 'AlamatUserController@alamatbaru');
-
-    //edit data alamat kirim
-    Route::post('/user/alamat/{id_alamat}/update', 'AlamatUserController@edit');
-
-    //delete data alamat kirim
-    Route::post('/user/alamat/{id_alamat}/delete', 'AlamatUserController@destroy');
-    
-    //eneble data alamat kirim
-    Route::post('/user/alamat/{id_alamat}/eneble', 'AlamatUserController@aktifAlamat');
-
-    //update foto profile
     Route::post('/user/profile/foto/update', 'FotoProfileController@cekprofile');
+    Route::post('/user/profile/alamat/update', 'AlamatUserController@cekAlamat');
+    Route::get('/user/alamat', 'AlamatUserController@index');
+    Route::post('/user/alamat/create', 'AlamatUserController@alamatbaru');
+    Route::post('/user/alamat/{id_alamat}/update', 'AlamatUserController@edit');
+    Route::post('/user/alamat/{id_alamat}/delete', 'AlamatUserController@destroy');
+    Route::post('/user/alamat/{id_alamat}/eneble', 'AlamatUserController@aktifAlamat');
     
-    //data toko
+    //TOKO
     Route::get('/toko', 'TokoController@index');
-    
-    //get data barang toko
-    Route::get('/toko/barang', 'TokoController@getbarang');
-    
-    //hapus foto barang
-    Route::post('/toko/barang/foto/hapus', 'FotoBarangController@hapus');
-    
-    //upload foto barang
-    Route::post('/toko/barang/foto/tambah', 'FotoBarangController@tambah');
-    
-    //create data barang toko
-    Route::post('/toko/barang/create', 'TokoController@tambahBarang');
-    
-    //update data barang toko
-    Route::post('/toko/barang/{id_barang}/update', 'TokoController@updateBarang');
-    
-    //update data toko
     Route::post('/toko/update', 'TokoController@cektoko');
+    Route::get('/toko/barang', 'TokoController@getbarang');
+    Route::post('/toko/barang/create', 'TokoController@tambahBarang');
+    Route::post('/toko/barang/foto/tambah', 'FotoBarangController@tambah');
+    Route::post('/toko/barang/{id_barang}/update', 'TokoController@updateBarang');
+    Route::post('/toko/barang/foto/hapus', 'FotoBarangController@hapus');
+    Route::post('/toko/barang/{id_barang}/hapus', 'TokoController@deletebarang');
     
-    //create chart
+    //CART
     Route::post('/cart/add', 'CartController@add');
-    
-    //delete chart
     Route::post('/cart/{id}/delete', 'CartController@delete');
-    
-    //update chart
     Route::post('/cart/{id}/edit', 'CartController@edit');
-    
-    //get chart
     Route::get('/cart', 'CartController@index');
     
-    //get checkout
+    //TRANSAKSI
     Route::post('/checkout', 'TransaksiController@checkout');
-    
-    //get beli
     Route::post('/beli ', 'TransaksiController@beli');
-    
-    //get bayar
     Route::post('/bayar ', 'TransaksiController@bayar');
-    
-    // sudah bayar
     Route::post('/sudah_bayar ', 'TransaksiController@sudahbayar');
-    
-    // data transaksi user
     Route::get('/user/transaksi ', 'TransaksiController@index');
-    
-    // edit sudah bayar
     Route::post('/sudah_bayar/edit ', 'TransaksiController@editsudahbayar');
-    
-    //data transaksi toko
     Route::get('/toko/transaksi', 'TransaksiController@transaksitoko');
-    
-    // get detail transaksi
     Route::get('/transaksi/detail/{id_transksi} ', 'TransaksiController@detailtransaksi');
-    
-    // pembayaran ditolak
     Route::post('/transaksi/pembayaran-ditolak/{id_transksi} ', 'TransaksiController@pembayaranditolak');
-    
-    // pembayaran diterima
     Route::post('/transaksi/pembayaran-diterima/{id_transksi} ', 'TransaksiController@pembayaranditerima');
-    
-    // packing
     Route::post('/transaksi/packing/{id_transksi} ', 'TransaksiController@packing');
-    
-    // pengiriman
     Route::post('/transaksi/pengiriman/{id_transksi} ', 'TransaksiController@pengiriman');
-    
-    // diterima
     Route::post('/transaksi/diterima/{id_transksi} ', 'TransaksiController@diterima');
     
 });
