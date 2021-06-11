@@ -20,7 +20,7 @@ class TransaksiController extends Controller
         $total_harga = 0;
         foreach ($request['id_chart'] as $key => $value) {
             
-            $file = Chart::find($value)->load('barang');
+            $file = Cart::find($value)->load('barang');
             $data[] = $file;
             $total_harga = $total_harga + ($file['barang']['harga']*$file['jumlah']);
 

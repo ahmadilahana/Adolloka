@@ -9,7 +9,7 @@ class Toko extends Model
 {
     use HasFactory;
     protected $table = "tb_toko";
-    protected $fillable = ['nama_toko', 'alamat', 'akun_id'];
+    protected $fillable = ['nama_toko', 'alamat', 'desa', 'kecamtan', 'kota', 'provinsi', 'kd_pos', 'domain_toko', 'akun_id'];
     public $timestamps = false;
 
     
